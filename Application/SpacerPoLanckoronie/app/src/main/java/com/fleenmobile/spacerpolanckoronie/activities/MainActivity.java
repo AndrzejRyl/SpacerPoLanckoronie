@@ -10,11 +10,20 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.fleenmobile.spacerpolanckoronie.R;
+import com.fleenmobile.spacerpolanckoronie.adapters.MenuItemAdapter;
+import com.fleenmobile.spacerpolanckoronie.adapters.MyMenuItem;
+import com.fleenmobile.spacerpolanckoronie.fragments.AboutUsFragment;
+import com.fleenmobile.spacerpolanckoronie.fragments.HistoryFragment;
+import com.fleenmobile.spacerpolanckoronie.fragments.InterestingPlacesFragment;
+import com.fleenmobile.spacerpolanckoronie.fragments.NavFragment;
+import com.fleenmobile.spacerpolanckoronie.fragments.WalkFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This is a main activity containing navigation drawer
@@ -23,7 +32,8 @@ import com.fleenmobile.spacerpolanckoronie.R;
  *
  * @author Fleen Mobile
  */
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements IFragmentCommunication{
+    public static final String MENU_ITEM_CHOSEN = "item chosen";
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private ListView mDrawerList;
@@ -32,29 +42,30 @@ public class MainActivity extends ActionBarActivity {
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
 
-    private String[] menuItemNames;
     private Fragment[] fragments;
+    private List<MyMenuItem> menuItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        initializeMenuItems();
+
         /* Get strings:
          * all menu item names
          * initial menu item name (History)
          * toolbar title for opening nav drawer
         */
-        menuItemNames = getResources().getStringArray(R.array.menu_item_names);
-        mTitle = menuItemNames[2];
+        mTitle = menuItems.get(2).getName();
         mDrawerTitle = getResources().getString(R.string.menu_title);
 
-        mDrawerList = (ListView) findViewById(R.id.nav_list);
+        mDrawerList = (ListView) findViewById(R.id.left_drawer);
         mToolbarTitleTV = (TextView) findViewById(R.id.toolbar_title);
 
         // Set the adapter for the list view
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.menu_list_item, menuItemNames));
+        mDrawerList.setAdapter(new MenuItemAdapter(this,
+                R.layout.menu_list_item, menuItems));
 
         // Set the list's click listener
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
@@ -64,9 +75,34 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
-    private void initializeFragments() {
-        //TODO:
+    private void initializeMenuItems() {
+        String[] menuItemNames = getResources().getStringArray(R.array.menu_item_names);
+        int[] menuItemIcons = {
+                R.drawable.ic_directions_walk_black_24dp,
+                R.drawable.ic_favorite_black_24dp,
+                R.drawable.ic_schedule_black_24dp,
+                R.drawable.ic_navigation_black_24dp,
+                R.drawable.ic_info_black_24dp
+        };
 
+        menuItems = new ArrayList<>();
+        for (int i=0; i < 5; i++) {
+            menuItems.add(new MyMenuItem(menuItemNames[i], menuItemIcons[i]));
+        }
+
+    }
+
+    private void initializeFragments() {
+        fragments = new Fragment[]{
+                new WalkFragment(),
+                new InterestingPlacesFragment(),
+                new HistoryFragment(),
+                new NavFragment(),
+                new AboutUsFragment()
+        };
+
+        // Set initial fragment (history)
+        selectItem(2);
     }
 
     private void initializeDrawerToggle() {
@@ -100,7 +136,7 @@ public class MainActivity extends ActionBarActivity {
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         // Set initial menu item name (History)
-        setTitle(menuItemNames[2]);
+        setTitle(mTitle);
     }
 
     @Override
@@ -123,6 +159,15 @@ public class MainActivity extends ActionBarActivity {
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
+    @Override
+    public void onMssgReceived(String mssg, String arg) {
+        if (mssg.equals(MENU_ITEM_CHOSEN)) {
+            // User has chosen an item and we have to set new fragment
+            selectItem(Integer.parseInt(arg));
+        }
+
+    }
+
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView parent, View view, int position, long id) {
@@ -137,13 +182,13 @@ public class MainActivity extends ActionBarActivity {
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.nav_top, fragments[position])
+                .replace(R.id.content_frame, fragments[position])
                 .commit();
 
         // Highlight the selected item, update the title, and close the drawer
         mDrawerList.setItemChecked(position, true);
-        mTitle = menuItemNames[position];
-        setTitle(menuItemNames[position]);
+        mTitle = menuItems.get(position).getName();
+        setTitle(mTitle);
         mDrawerLayout.closeDrawer(mDrawerList);
     }
 

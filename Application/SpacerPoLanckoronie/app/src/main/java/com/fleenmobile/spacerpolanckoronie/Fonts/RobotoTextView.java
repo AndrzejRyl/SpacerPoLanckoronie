@@ -1,4 +1,4 @@
-package com.fleenmobile.spacerpolanckoronie.Fonts;
+package com.fleenmobile.spacerpolanckoronie.fonts;
 
 import android.content.Context;
 import android.content.res.TypedArray;

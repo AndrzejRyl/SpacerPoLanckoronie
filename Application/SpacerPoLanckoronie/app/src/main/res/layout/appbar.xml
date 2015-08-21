@@ -6,7 +6,7 @@
     android:background="@color/primary"
     android:title="">
 
-    <com.fleenmobile.spacerpolanckoronie.Fonts.RobotoTextView
+    <com.fleenmobile.spacerpolanckoronie.fonts.RobotoTextView
         android:id="@+id/toolbar_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
