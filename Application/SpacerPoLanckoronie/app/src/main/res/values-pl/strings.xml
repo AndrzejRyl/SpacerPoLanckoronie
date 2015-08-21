@@ -2,4 +2,5 @@
 <resources>
     <string name="title_first_line">Spacer</string>
     <string name="title_second_line">po Lanckoronie</string>
+    <string name="menu_title">Menu</string>
 </resources>

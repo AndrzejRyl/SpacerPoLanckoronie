@@ -7,4 +7,7 @@
     <string name="title_second_line">walk</string>
     <string name="title_activity_history">HistoryActivity</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="drawer_open">drawer opened</string>
+    <string name="drawer_close">drawer closed</string>
+    <string name="menu_title">Menu</string>
 </resources>
