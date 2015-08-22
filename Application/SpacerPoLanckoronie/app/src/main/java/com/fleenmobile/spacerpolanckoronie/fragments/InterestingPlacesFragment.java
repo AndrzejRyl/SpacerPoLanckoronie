@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -70,39 +69,31 @@ public class InterestingPlacesFragment extends Fragment {
         list = (ListView) rootView.findViewById(R.id.interesting_places_listview);
         list.setAdapter(new InterestingPlacesAdapter(this.getActivity(),
                 R.layout.interesting_place_list_item, interestingPlaces));
-        list.setOnItemClickListener(new MyItemClickListener());
 
         mToolbarTitleTV = (TextView) rootView.findViewById(R.id.toolbar_title);
 
         return rootView;
     }
 
-    private class MyItemClickListener implements ListView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView parent, View view, int position, long id) {
-            selectItem(position);
-        }
+    public void setTitle(CharSequence title) {
+        mToolbarTitleTV.setText(title);
     }
 
     /**
-     * Swaps fragments in the main content view
+     * Sets a flyweight fragment with interesting place and
+     * changes hamburger icon into an arrow
+     *
+     * @param position Position of card chosen
      */
-    private void selectItem(int position) {
+    public void selectItem(int position) {
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.content_frame, fragments[position])
                 .commit();
 
-        // Update the title and change hamburger into an arrow
-        String mTitle = interestingPlaces.get(position).getName();
-        setTitle(mTitle);
-        // TODO: Change hamburger into an arrow
     }
 
-    public void setTitle(CharSequence title) {
-        mToolbarTitleTV.setText(title);
-    }
 
 
 }

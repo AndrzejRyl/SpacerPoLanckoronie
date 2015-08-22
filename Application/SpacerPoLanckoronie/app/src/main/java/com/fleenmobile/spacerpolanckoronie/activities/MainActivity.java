@@ -103,7 +103,7 @@ public class MainActivity extends ActionBarActivity implements IFragmentCommunic
         };
 
         // Set initial fragment (history)
-        selectItem(2);
+        selectMenuItem(2);
     }
 
     private void initializeDrawerToggle() {
@@ -164,7 +164,10 @@ public class MainActivity extends ActionBarActivity implements IFragmentCommunic
     public void onMssgReceived(String mssg, String arg) {
         if (mssg.equals(MENU_ITEM_CHOSEN)) {
             // User has chosen an item and we have to set new fragment
-            selectItem(Integer.parseInt(arg));
+            selectMenuItem(Integer.parseInt(arg));
+        } else if (mssg.equals(INTERESTING_PLACE_CHOSEN)) {
+            // User has chosen an interesting place and we have to set new flyweight fragment
+            ((InterestingPlacesFragment)fragments[1]).selectItem(Integer.parseInt(arg));
         }
 
     }
@@ -172,14 +175,14 @@ public class MainActivity extends ActionBarActivity implements IFragmentCommunic
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView parent, View view, int position, long id) {
-            selectItem(position);
+            selectMenuItem(position);
         }
     }
 
     /**
      * Swaps fragments in the main content view
      */
-    private void selectItem(int position) {
+    private void selectMenuItem(int position) {
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
