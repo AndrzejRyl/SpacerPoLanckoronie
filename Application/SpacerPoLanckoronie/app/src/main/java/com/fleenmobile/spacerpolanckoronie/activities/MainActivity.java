@@ -34,6 +34,7 @@ import java.util.List;
  */
 public class MainActivity extends ActionBarActivity implements IFragmentCommunication{
     public static final String MENU_ITEM_CHOSEN = "item chosen";
+    public static final String INTERESTING_PLACE_CHOSEN = "interesting place chosen";
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private ListView mDrawerList;

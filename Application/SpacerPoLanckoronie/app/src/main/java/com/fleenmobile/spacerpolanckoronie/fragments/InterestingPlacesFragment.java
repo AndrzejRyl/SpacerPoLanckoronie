@@ -2,14 +2,22 @@ package com.fleenmobile.spacerpolanckoronie.fragments;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.fleenmobile.spacerpolanckoronie.R;
+import com.fleenmobile.spacerpolanckoronie.Utils;
 import com.fleenmobile.spacerpolanckoronie.activities.IFragmentCommunication;
+import com.fleenmobile.spacerpolanckoronie.adapters.InterestingPlace;
+import com.fleenmobile.spacerpolanckoronie.adapters.InterestingPlacesAdapter;
+
+import java.util.List;
 
 /**
  * @author FleenMobile at 2015-08-22
@@ -17,13 +25,31 @@ import com.fleenmobile.spacerpolanckoronie.activities.IFragmentCommunication;
 public class InterestingPlacesFragment extends Fragment {
 
     private IFragmentCommunication mActivity;
-    private TextView testTV;
+
+    private ListView list;
+    private TextView mToolbarTitleTV;
+
+    private List<InterestingPlace> interestingPlaces;
+
+    private Fragment[] fragments;
 
     /**
      * Required empty constructor
      */
     public InterestingPlacesFragment() {
 
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        initializeFragments();
+        interestingPlaces = Utils.getInterestingPlaces(this.getActivity());
+    }
+
+    private void initializeFragments() {
+        // TODO: Initialize all flyweight fragments containing interesting places
     }
 
     @Override
@@ -40,13 +66,43 @@ public class InterestingPlacesFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_interesting_places, container, false);
 
-        // Find views
-        testTV = (TextView)rootView.findViewById(R.id.interesting_places_test);
-        testTV.setText("Interesting places");
+        // Find list view and set the adapter containing cards to it
+        list = (ListView) rootView.findViewById(R.id.interesting_places_listview);
+        list.setAdapter(new InterestingPlacesAdapter(this.getActivity(),
+                R.layout.interesting_place_list_item, interestingPlaces));
+        list.setOnItemClickListener(new MyItemClickListener());
+
+        mToolbarTitleTV = (TextView) rootView.findViewById(R.id.toolbar_title);
 
         return rootView;
     }
 
+    private class MyItemClickListener implements ListView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView parent, View view, int position, long id) {
+            selectItem(position);
+        }
+    }
+
+    /**
+     * Swaps fragments in the main content view
+     */
+    private void selectItem(int position) {
+        // Insert the fragment by replacing any existing fragment
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.content_frame, fragments[position])
+                .commit();
+
+        // Update the title and change hamburger into an arrow
+        String mTitle = interestingPlaces.get(position).getName();
+        setTitle(mTitle);
+        // TODO: Change hamburger into an arrow
+    }
+
+    public void setTitle(CharSequence title) {
+        mToolbarTitleTV.setText(title);
+    }
 
 
 }
