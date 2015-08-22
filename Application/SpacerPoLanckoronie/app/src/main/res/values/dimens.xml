@@ -4,8 +4,11 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="title_first_line_margin">40dp</dimen>
     <dimen name="title_second_line_margin">70dp</dimen>
-    <dimen name="title">35sp</dimen>
+    <dimen name="splash_screen_title">35sp</dimen>
     <dimen name="menu_item">25sp</dimen>
     <dimen name="toolbar_title">25sp</dimen>
     <dimen name="menu_item_height">60dp</dimen>
+    <dimen name="title">28sp</dimen>
+    <dimen name="content">20sp</dimen>
+    <dimen name="content_margin">30dp</dimen>
 </resources>

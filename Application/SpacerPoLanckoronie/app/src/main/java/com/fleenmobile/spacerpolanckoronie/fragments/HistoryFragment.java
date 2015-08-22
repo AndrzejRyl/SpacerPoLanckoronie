@@ -40,10 +40,6 @@ public class HistoryFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_history, container, false);
 
-        // Find views
-        testTV = (TextView)rootView.findViewById(R.id.history_test);
-        testTV.setText("History");
-
         return rootView;
     }
 
