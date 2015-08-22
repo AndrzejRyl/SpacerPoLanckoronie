@@ -6,4 +6,6 @@
     <dimen name="title">18sp</dimen>
     <dimen name="content">15sp</dimen>
     <dimen name="content_margin">24dp</dimen>
+    <dimen name="button">10sp</dimen>
+    <dimen name="button_padding">12dp</dimen>
 </resources>

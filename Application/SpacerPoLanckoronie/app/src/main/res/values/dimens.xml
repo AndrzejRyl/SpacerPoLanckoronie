@@ -11,4 +11,6 @@
     <dimen name="title">28sp</dimen>
     <dimen name="content">20sp</dimen>
     <dimen name="content_margin">30dp</dimen>
+    <dimen name="button">15sp</dimen>
+    <dimen name="button_padding">15dp</dimen>
 </resources>

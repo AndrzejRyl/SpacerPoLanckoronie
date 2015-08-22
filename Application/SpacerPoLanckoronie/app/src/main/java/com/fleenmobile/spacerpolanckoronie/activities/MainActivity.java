@@ -197,4 +197,12 @@ public class MainActivity extends ActionBarActivity implements IFragmentCommunic
         mToolbarTitleTV.setText(title);
     }
 
+    /**
+     * Starts navigation system with the destination set for Lanckorona
+     * @param v Button 'navigation'
+     */
+    public void startNavSystem(View v) {
+        ((NavFragment)fragments[3]).startNavSystem();
+    }
+
 }

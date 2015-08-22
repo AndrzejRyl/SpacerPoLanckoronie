@@ -14,4 +14,9 @@
     <string name="history_content1">Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula. Ut molestie a, ultricies porta urna. Vestibulum commodo volutpat a, convallis ac, laoreet enim. Phasellus fermentum in, dolor. Pellentesque facilisis. Nulla imperdiet sit amet magna. Vestibulum dapibus, mauris nec malesuada fames ac turpis velit, rhoncus eu, luctus et interdum adipiscing wisi. Aliquam erat ac ipsum. Integer aliquam purus.</string>
     <string name="history_content2">Cum sociis natoque penatibus et ultrices volutpat. Nullam wisi ultricies a, gravida vitae, dapibus risus ante sodales lectus blandit eu, tempor diam pede cursus vitae, ultricies eu, faucibus quis, porttitor eros cursus lectus, pellentesque eget, bibendum a, gravida ullamcorper quam. Nullam viverra consectetuer. Quisque cursus et, porttitor risus. Aliquam sem. In hendrerit nulla quam nunc, accumsan congue. Lorem ipsum primis in nibh vel risus. Sed vel lectus. Ut sagittis, ipsum dolor quam.</string>
     <string name="history_title2">Title 2</string>
+    <string name="nav_title">If you\'re not in Lanckorona\\nwe can navigate you there</string>
+    <string name="nav_button">NAVIGATION</string>
+    <string name="gps_dialog_title">Turn on GPS</string>
+    <string name="gps_dialog_content">In order to use this function you have to turn on the GPS</string>
+    <string name="gps_dialog_button">SETTINGS</string>
 </resources>
