@@ -35,6 +35,7 @@ import java.util.List;
 public class MainActivity extends ActionBarActivity implements IFragmentCommunication{
     public static final String MENU_ITEM_CHOSEN = "item chosen";
     public static final String INTERESTING_PLACE_CHOSEN = "interesting place chosen";
+    public static final String GO_BACK_INTERESTING_PLACES = "go back";
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private ListView mDrawerList;
@@ -168,6 +169,9 @@ public class MainActivity extends ActionBarActivity implements IFragmentCommunic
         } else if (mssg.equals(INTERESTING_PLACE_CHOSEN)) {
             // User has chosen an interesting place and we have to set new flyweight fragment
             ((InterestingPlacesFragment)fragments[1]).selectItem(Integer.parseInt(arg));
+        } else if (mssg.equals(GO_BACK_INTERESTING_PLACES)) {
+            // Go back from flyweight fragment to interesting places fragment
+            selectMenuItem(1);
         }
 
     }

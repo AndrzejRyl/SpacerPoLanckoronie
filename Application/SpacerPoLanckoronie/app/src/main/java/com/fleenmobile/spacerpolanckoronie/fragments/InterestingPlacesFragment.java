@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.fleenmobile.spacerpolanckoronie.R;
 import com.fleenmobile.spacerpolanckoronie.Utils;
@@ -16,6 +15,7 @@ import com.fleenmobile.spacerpolanckoronie.activities.IFragmentCommunication;
 import com.fleenmobile.spacerpolanckoronie.adapters.InterestingPlace;
 import com.fleenmobile.spacerpolanckoronie.adapters.InterestingPlacesAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,11 +26,9 @@ public class InterestingPlacesFragment extends Fragment {
     private IFragmentCommunication mActivity;
 
     private ListView list;
-    private TextView mToolbarTitleTV;
 
     private List<InterestingPlace> interestingPlaces;
-
-    private Fragment[] fragments;
+    private List<InterestingPlaceFlyweightFragment> fragments;
 
     /**
      * Required empty constructor
@@ -43,12 +41,19 @@ public class InterestingPlacesFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        initializeFragments();
         interestingPlaces = Utils.getInterestingPlaces(this.getActivity());
+        initializeFragments();
     }
 
     private void initializeFragments() {
-        // TODO: Initialize all flyweight fragments containing interesting places
+        InterestingPlaceFlyweightFragment fragment;
+        fragments = new ArrayList<>();
+
+        for (InterestingPlace place : interestingPlaces) {
+            fragment = new InterestingPlaceFlyweightFragment();
+            fragment.setPlace(place);
+            fragments.add(fragment);
+        }
     }
 
     @Override
@@ -70,18 +75,12 @@ public class InterestingPlacesFragment extends Fragment {
         list.setAdapter(new InterestingPlacesAdapter(this.getActivity(),
                 R.layout.interesting_place_list_item, interestingPlaces));
 
-        mToolbarTitleTV = (TextView) rootView.findViewById(R.id.toolbar_title);
-
         return rootView;
     }
 
-    public void setTitle(CharSequence title) {
-        mToolbarTitleTV.setText(title);
-    }
-
     /**
-     * Sets a flyweight fragment with interesting place and
-     * changes hamburger icon into an arrow
+     * Sets a flyweight fragment with interesting place
+     * (it changes hamburger icon into an arrow going back to interesting places)
      *
      * @param position Position of card chosen
      */
@@ -89,11 +88,9 @@ public class InterestingPlacesFragment extends Fragment {
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.content_frame, fragments[position])
+                .replace(R.id.content_frame, fragments.get(position))
                 .commit();
 
     }
-
-
 
 }
