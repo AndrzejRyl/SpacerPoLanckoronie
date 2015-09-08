@@ -52,6 +52,10 @@ public class InterestingPlacesFragment extends Fragment {
         for (InterestingPlace place : interestingPlaces) {
             fragment = new InterestingPlaceFlyweightFragment();
             fragment.setPlace(place);
+
+            // Set the mode in which FAB is not visible but arrow
+            // taking the user back to this fragment is
+            fragment.setMode(Utils.INTERESTING_PLACE_MODE);
             fragments.add(fragment);
         }
     }

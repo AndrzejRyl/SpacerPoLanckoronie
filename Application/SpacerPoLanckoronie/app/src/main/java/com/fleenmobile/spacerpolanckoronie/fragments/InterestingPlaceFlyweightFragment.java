@@ -9,9 +9,11 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.fleenmobile.spacerpolanckoronie.R;
+import com.fleenmobile.spacerpolanckoronie.Utils;
 import com.fleenmobile.spacerpolanckoronie.activities.IFragmentCommunication;
 import com.fleenmobile.spacerpolanckoronie.activities.MainActivity;
 import com.fleenmobile.spacerpolanckoronie.adapters.InterestingPlace;
@@ -32,6 +34,11 @@ public class InterestingPlaceFlyweightFragment extends Fragment {
 
     private MediaPlayer mp;
 
+    // Walk module additions
+    private InterestingPlace nextPlace;
+    private ImageButton FAB;
+    private String mode = "";
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -39,23 +46,6 @@ public class InterestingPlaceFlyweightFragment extends Fragment {
         // Get a holder to the host activity
         mActivity = (IFragmentCommunication) activity;
     }
-
-
-    /**
-     * Set arrow to take the user back to "Interesting places" card
-     */
-    private void setArrow() {
-        arrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Stop playing the sound
-                if (mp != null && mp.isPlaying())
-                    mp.pause();
-                mActivity.onMssgReceived(MainActivity.GO_BACK_INTERESTING_PLACES, "");
-            }
-        });
-    }
-
 
     @Override
     public void onPause() {
@@ -78,17 +68,22 @@ public class InterestingPlaceFlyweightFragment extends Fragment {
         content.setMovementMethod(new ScrollingMovementMethod());
         image = (ImageView) rootView.findViewById(R.id.flyweight_image);
         arrow = (ImageView) rootView.findViewById(R.id.flyweight_arrow);
+        FAB = (ImageButton) rootView.findViewById(R.id.flyweight_FAB);
 
         // Set data to those views based on interesting place
         name.setText(place.getName());
         content.setText(place.getDescription());
         image.setImageResource(place.getImage());
 
-        // Set arrow's onClickListener to get the user back to 'interesting places'
-        setArrow();
-
         // Play the sound connected to the given interesting place
         playSound();
+
+        // Set visibility on arrow and FAB buttons
+        if (mode.equals(Utils.INTERESTING_PLACE_MODE)) {
+            setArrow();
+        } else if (mode.equals(Utils.WALK_MODE)) {
+            setFAB();
+        }
 
         return rootView;
     }
@@ -100,7 +95,7 @@ public class InterestingPlaceFlyweightFragment extends Fragment {
             @Override
             public void onCompletion(MediaPlayer mp) {
                 mp.release();
-                InterestingPlaceFlyweightFragment.this.mp=null;
+                InterestingPlaceFlyweightFragment.this.mp = null;
             }
         });
 
@@ -114,5 +109,54 @@ public class InterestingPlaceFlyweightFragment extends Fragment {
 
     public void setPlace(InterestingPlace place) {
         this.place = place;
+    }
+
+    public void setNextPlace(InterestingPlace place) {
+        this.nextPlace = place;
+    }
+
+    /**
+     * Set arrow to take the user back to "Interesting places" card
+     */
+    public void setArrow() {
+        arrow.setVisibility(View.VISIBLE);
+        FAB.setVisibility(View.INVISIBLE);
+        arrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Stop playing the sound
+                if (mp != null && mp.isPlaying())
+                    mp.pause();
+                mActivity.onMssgReceived(MainActivity.GO_BACK_INTERESTING_PLACES, "");
+            }
+        });
+    }
+
+    /**
+     * Set FAB to take the user next place
+     */
+    public void setFAB() {
+        FAB.setVisibility(View.VISIBLE);
+        arrow.setVisibility(View.INVISIBLE);
+        FAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Stop playing the sound
+                if (mp != null && mp.isPlaying())
+                    mp.pause();
+
+                goToNextPlace();
+            }
+        });
+    }
+
+    // Show the user dialog displaying which place is next and allow
+    // him to see the map with this place marked
+    private void goToNextPlace() {
+        // TODO: Show a NextPlaceDialog
+    }
+
+    public void setMode(String mode) {
+        this.mode = mode;
     }
 }

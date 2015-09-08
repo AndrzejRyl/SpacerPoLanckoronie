@@ -16,5 +16,6 @@
 
     <color name="primary">#4caf50</color>
     <color name="primaryDarker">#388e3c</color>
+    <color name="secondary">#E91E63</color>
     <color name="background">#EEEEEE</color>
 </resources>

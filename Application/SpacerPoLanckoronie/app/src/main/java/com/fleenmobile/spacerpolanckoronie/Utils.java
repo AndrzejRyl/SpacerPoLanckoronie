@@ -20,6 +20,9 @@ import java.util.List;
  */
 public class Utils {
 
+    public static final String INTERESTING_PLACE_MODE = "interesting place mode";
+    public static final String WALK_MODE = "walk mode";
+
     /**
      * Checks whether the GPS is turned on
      * @return True if it's on and False otherwise
