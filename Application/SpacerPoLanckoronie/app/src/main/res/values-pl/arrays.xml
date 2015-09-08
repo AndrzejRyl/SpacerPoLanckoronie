@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="menu_item_names">
+        <item>Spacer</item>
+        <item>Ciekawe miejsca</item>
+        <item>Historia</item>
+        <item>Nawigacja</item>
+        <item>O nas</item>
+    </string-array>
+</resources>

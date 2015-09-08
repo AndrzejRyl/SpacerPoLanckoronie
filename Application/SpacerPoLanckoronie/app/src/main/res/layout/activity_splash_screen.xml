@@ -1,0 +1,39 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#6d7578"
+    tools:context=".SplashScreen">
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/loading" />
+
+    <com.fleenmobile.spacerpolanckoronie.fonts.RobotoTextView
+        android:id="@+id/splash_title_first"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/title_first_line_margin"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:text="@string/title_first_line"
+        android:textColor="#C7FFFFFF"
+        android:textSize="@dimen/splash_screen_title"
+        app:typeface="roboto_medium_italic" />
+
+    <com.fleenmobile.spacerpolanckoronie.fonts.RobotoTextView
+        android:id="@+id/splash_title_second"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/splash_title_first"
+        android:layout_marginLeft="@dimen/title_second_line_margin"
+        android:text="@string/title_second_line"
+        android:textColor="#96FFFFFF"
+        android:textSize="@dimen/splash_screen_title"
+        app:typeface="roboto_thin" />
+
+
+</RelativeLayout>
