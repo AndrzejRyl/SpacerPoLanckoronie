@@ -162,6 +162,11 @@ public class MainActivity extends ActionBarActivity implements IFragmentCommunic
     }
 
     @Override
+    public void onBackPressed() {
+        // Do nothing ;)
+    }
+
+    @Override
     public void onMssgReceived(String mssg, String arg) {
         if (mssg.equals(MENU_ITEM_CHOSEN)) {
             // User has chosen an item and we have to set new fragment
