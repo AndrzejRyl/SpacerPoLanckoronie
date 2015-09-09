@@ -50,4 +50,9 @@ public class GPSRange {
 
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "BottomLeft: " + leftBottom.getLatitude() + "," + leftBottom.getLongitude() + "; TopRight: " + rightTop.getLatitude() + "," + rightTop.getLongitude();
+    }
 }

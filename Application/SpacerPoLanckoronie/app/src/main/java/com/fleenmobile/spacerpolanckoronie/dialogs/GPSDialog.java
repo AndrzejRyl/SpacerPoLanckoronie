@@ -1,7 +1,7 @@
 package com.fleenmobile.spacerpolanckoronie.dialogs;
 
+import android.app.Activity;
 import android.app.DialogFragment;
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,9 +19,9 @@ import com.fleenmobile.spacerpolanckoronie.Utils;
  * @author FleenMobile at 2015-08-22
  */
 public class GPSDialog extends DialogFragment {
-    private static Fragment creatorInstance;
+    private static Activity creatorInstance;
 
-    public static GPSDialog newInstance(Fragment instance) {
+    public static GPSDialog newInstance(Activity instance) {
 
         // Start a dialog
         GPSDialog dialog = new GPSDialog();

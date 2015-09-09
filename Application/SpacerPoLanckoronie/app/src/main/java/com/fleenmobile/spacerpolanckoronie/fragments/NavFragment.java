@@ -17,7 +17,7 @@ import com.fleenmobile.spacerpolanckoronie.activities.IFragmentCommunication;
 /**
  * @author FleenMobile at 2015-08-22
  */
-public class NavFragment extends Fragment{
+public class NavFragment extends Fragment {
 
     private IFragmentCommunication mActivity;
     private TextView testTV;
@@ -51,7 +51,7 @@ public class NavFragment extends Fragment{
      */
     public void startNavSystem() {
         if (!Utils.GPSOn(this.getActivity())) {
-            Utils.showGPSDialog(this);
+            Utils.showGPSDialog(this.getActivity());
             return;
         }
 

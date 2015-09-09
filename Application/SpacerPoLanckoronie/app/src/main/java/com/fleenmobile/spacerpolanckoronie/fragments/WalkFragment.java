@@ -2,6 +2,7 @@ package com.fleenmobile.spacerpolanckoronie.fragments;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -30,7 +31,7 @@ public class WalkFragment extends Fragment {
     private IFragmentCommunication mActivity;
 
     private List<InterestingPlace> interestingPlaces;
-    private List<InterestingPlaceFlyweightFragment> fragments;
+    private List<Fragment> fragments;
 
     /**
      * Required empty constructor
@@ -47,13 +48,10 @@ public class WalkFragment extends Fragment {
         mActivity = (IFragmentCommunication) activity;
 
         // Get interesting places in their right order
-        interestingPlaces = Utils.getInterestingPlaces(((Activity)mActivity));
+        interestingPlaces = Utils.getInterestingPlaces(((Activity) mActivity));
 
         prepareFragments();
 
-        // Start walk by showing first interesting place or
-        // informing the user where he should go to start it
-        startWalk();
     }
 
     @Override
@@ -65,14 +63,13 @@ public class WalkFragment extends Fragment {
         return rootView;
     }
 
-
     /**
      * Starts navigation system with the destination set to beginning of
      * the walk
      */
     public void navigateToStart() {
         if (!Utils.GPSOn(this.getActivity())) {
-            Utils.showGPSDialog(this);
+            Utils.showGPSDialog(this.getActivity());
             return;
         }
 
@@ -86,10 +83,10 @@ public class WalkFragment extends Fragment {
         fragments = new ArrayList<>();
         int i = 0;
 
-        for (i=0; i+1 < interestingPlaces.size(); i++) {
+        for (i = 0; i + 1 < interestingPlaces.size(); i++) {
             fragment = new InterestingPlaceFlyweightFragment();
             fragment.setPlace(interestingPlaces.get(i));
-            fragment.setNextPlace(interestingPlaces.get(i+1));
+            fragment.setNextPlace(interestingPlaces.get(i + 1));
 
             // Set the mode in which FAB is visible but arrow
             // taking the user back to this fragment isn't
@@ -109,8 +106,15 @@ public class WalkFragment extends Fragment {
 
     }
 
-    private void startWalk() {
-        // TODO: Start service
+    public void setFragment(int idx) {
+        // Insert the fragment by replacing any existing fragment
+        FragmentManager fragmentManager = ((Activity) mActivity).getFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.content_frame, fragments.get(idx))
+                .commit();
     }
 
+    public List<Fragment> getFragments() {
+        return fragments;
+    }
 }

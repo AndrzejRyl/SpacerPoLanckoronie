@@ -24,6 +24,7 @@
             android:screenOrientation="portrait"
             android:label="" >
         </activity>
+        <service android:name=".GPSUtils.GPSService"/>
     </application>
 
 </manifest>
