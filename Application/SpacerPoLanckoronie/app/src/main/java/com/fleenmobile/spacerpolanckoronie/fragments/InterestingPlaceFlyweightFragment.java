@@ -17,6 +17,7 @@ import com.fleenmobile.spacerpolanckoronie.Utils;
 import com.fleenmobile.spacerpolanckoronie.activities.IFragmentCommunication;
 import com.fleenmobile.spacerpolanckoronie.activities.MainActivity;
 import com.fleenmobile.spacerpolanckoronie.adapters.InterestingPlace;
+import com.fleenmobile.spacerpolanckoronie.dialogs.NextPlaceDialog;
 import com.fleenmobile.spacerpolanckoronie.fonts.RobotoTextView;
 
 /**
@@ -38,6 +39,7 @@ public class InterestingPlaceFlyweightFragment extends Fragment {
     private InterestingPlace nextPlace;
     private ImageButton FAB;
     private String mode = "";
+    private NextPlaceDialog dialog;
 
     @Override
     public void onAttach(Activity activity) {
@@ -86,6 +88,14 @@ public class InterestingPlaceFlyweightFragment extends Fragment {
         }
 
         return rootView;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        if (dialog != null && dialog.isVisible())
+            dialog.dismiss();
     }
 
     private void playSound() {
@@ -153,7 +163,12 @@ public class InterestingPlaceFlyweightFragment extends Fragment {
     // Show the user dialog displaying which place is next and allow
     // him to see the map with this place marked
     private void goToNextPlace() {
-        // TODO: Show a NextPlaceDialog
+        if (nextPlace != null) {
+            dialog = NextPlaceDialog.newInstance(mActivity, nextPlace);
+            dialog.show(((Activity) mActivity).getFragmentManager(), "Next place dialog");
+        } else {
+            // TODO: Show info about the honey man ;)
+        }
     }
 
     public void setMode(String mode) {

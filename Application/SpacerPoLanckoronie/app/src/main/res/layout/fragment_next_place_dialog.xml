@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.fleenmobile.spacerpolanckoronie.fonts.RobotoTextView
+        android:id="@+id/next_place_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:padding="10dp"
+        android:gravity="center"
+        android:text="@string/next_place_dialog_title"
+        android:textColor="#C7FFFFFF"
+        android:background="@color/primaryDarker"
+        android:textSize="@dimen/title"
+        app:typeface="roboto_medium" />
+
+    <com.fleenmobile.spacerpolanckoronie.fonts.RobotoTextView
+        android:id="@+id/next_place_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:textColor="#D7000000"
+        android:textSize="@dimen/content"
+        app:typeface="roboto_thin" />
+
+    <ImageView
+        android:id="@+id/next_place_image"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"/>
+
+    <com.fleenmobile.spacerpolanckoronie.fonts.RobotoTextView
+        android:id="@+id/next_place_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:clickable="true"
+        android:gravity="center"
+        android:paddingRight="@dimen/button_padding"
+        android:text="@string/next_place_dialog_button"
+        android:textColor="#3f51b5"
+        android:textSize="@dimen/button"
+        app:typeface="roboto_medium" />
+
+
+</LinearLayout>

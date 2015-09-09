@@ -38,6 +38,8 @@ public class GPSService extends Service {
     private List<Fragment> fragments;
     private InterestingPlacesThread interestingPlacesThread;
 
+    private boolean walkStarted = false;
+
 
     @Override
     public void onCreate() {
@@ -88,6 +90,7 @@ public class GPSService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        walkStarted = false;
         // Try not to kill this service and make sure that it has MainActivity alive
         // when it's restarted
         return START_REDELIVER_INTENT;
@@ -121,13 +124,24 @@ public class GPSService extends Service {
         public void run() {
             try {
                 while (true) {
-                    Log.e("Zonk", "in");
-                    // Check if the user is in range of any interesting place
-                    // but don't double broadcasts
-                    for (InterestingPlace place : interestingPlaces) {
+                    if (!walkStarted) {
+                        // Wait for the user to get into the range of first place
+                        // because we're starting the walk
+                        InterestingPlace place = interestingPlaces.get(0);
                         if (place != interestingPlaceInRange && mLocation != null && place.getRange().inRange(mLocation)) {
                             sendMyBroadcast(place);
                             interestingPlaceInRange = place;
+                            walkStarted = true;
+                        }
+                    } else {
+
+                        // Check if the user is in range of any interesting place
+                        // but don't double broadcasts
+                        for (InterestingPlace place : interestingPlaces) {
+                            if (place != interestingPlaceInRange && mLocation != null && place.getRange().inRange(mLocation)) {
+                                sendMyBroadcast(place);
+                                interestingPlaceInRange = place;
+                            }
                         }
                     }
 
