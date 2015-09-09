@@ -1,6 +1,5 @@
 package com.fleenmobile.spacerpolanckoronie.GPSUtils;
 
-import android.app.Fragment;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -11,7 +10,6 @@ import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 
 import com.fleenmobile.spacerpolanckoronie.Utils;
 import com.fleenmobile.spacerpolanckoronie.adapters.InterestingPlace;
@@ -35,10 +33,9 @@ public class GPSService extends Service {
 
     private List<InterestingPlace> interestingPlaces;
     private InterestingPlace interestingPlaceInRange = null;
-    private List<Fragment> fragments;
     private InterestingPlacesThread interestingPlacesThread;
 
-    private boolean walkStarted = false;
+    private static boolean mWalkStarted = false;
 
 
     @Override
@@ -81,6 +78,10 @@ public class GPSService extends Service {
         return myBinder;
     }
 
+    public Location getLocation() {
+        return mLocation;
+    }
+
     // This allows activities to bind to this service and call it's methods
     public class MyBinder extends Binder {
         public GPSService getService() {
@@ -90,7 +91,6 @@ public class GPSService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        walkStarted = false;
         // Try not to kill this service and make sure that it has MainActivity alive
         // when it's restarted
         return START_REDELIVER_INTENT;
@@ -98,10 +98,6 @@ public class GPSService extends Service {
 
     public void setInterestingPlaces(List<InterestingPlace> interestingPlaces) {
         this.interestingPlaces = interestingPlaces;
-    }
-
-    public void setFragments(List<Fragment> fragments) {
-        this.fragments = fragments;
     }
 
     // Start a thread checking the user's location and sending a broadcast
@@ -116,6 +112,14 @@ public class GPSService extends Service {
             interestingPlacesThread.interrupt();
     }
 
+    /**
+     * Tells GPSService to wait for the user to get in range of the first
+     * place in walk order
+     */
+    public static void setWalkStarted(boolean walkStarted) {
+        mWalkStarted = walkStarted;
+    }
+
     // This thread checks user's location every 2s and
     // sends a broadcast if the user is in range of any
     // interesting place
@@ -124,14 +128,14 @@ public class GPSService extends Service {
         public void run() {
             try {
                 while (true) {
-                    if (!walkStarted) {
+                    if (!mWalkStarted) {
                         // Wait for the user to get into the range of first place
                         // because we're starting the walk
                         InterestingPlace place = interestingPlaces.get(0);
                         if (place != interestingPlaceInRange && mLocation != null && place.getRange().inRange(mLocation)) {
                             sendMyBroadcast(place);
                             interestingPlaceInRange = place;
-                            walkStarted = true;
+                            mWalkStarted = true;
                         }
                     } else {
 
@@ -156,7 +160,6 @@ public class GPSService extends Service {
     // Sends a broadcast informing activities that user has
     // just gone into the range of the given place
     private void sendMyBroadcast(InterestingPlace place) {
-        Log.e("Zonk", "sending");
         Intent intent = new Intent(Utils.INTERESTING_PLACE_BROADCAST);
 
         // Add data

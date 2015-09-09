@@ -1,15 +1,20 @@
 package com.fleenmobile.spacerpolanckoronie.dialogs;
 
+import android.app.Activity;
 import android.app.DialogFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.fleenmobile.spacerpolanckoronie.GPSUtils.GPSService;
 import com.fleenmobile.spacerpolanckoronie.R;
 import com.fleenmobile.spacerpolanckoronie.activities.IFragmentCommunication;
+import com.fleenmobile.spacerpolanckoronie.activities.MapActivity;
 import com.fleenmobile.spacerpolanckoronie.adapters.InterestingPlace;
 import com.fleenmobile.spacerpolanckoronie.fonts.RobotoTextView;
 
@@ -25,12 +30,13 @@ import com.fleenmobile.spacerpolanckoronie.fonts.RobotoTextView;
 public class NextPlaceDialog extends DialogFragment{
     private static IFragmentCommunication creatorInstance;
     private static InterestingPlace mPlace;
+    private static GPSService mService;
 
     private ImageView imageView;
     private RobotoTextView nameTV;
     private RobotoTextView buttonTV;
 
-    public static NextPlaceDialog newInstance(IFragmentCommunication instance, InterestingPlace place) {
+    public static NextPlaceDialog newInstance(IFragmentCommunication instance, InterestingPlace place, GPSService service) {
 
         // Start a dialog
         NextPlaceDialog dialog = new NextPlaceDialog();
@@ -40,6 +46,9 @@ public class NextPlaceDialog extends DialogFragment{
 
         // This is a place that the user is going to
         mPlace = place;
+
+        // This is a service that will be needed in MapActivity
+        mService = service;
 
         return dialog;
     }
@@ -74,7 +83,14 @@ public class NextPlaceDialog extends DialogFragment{
         buttonTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Start MapActivity with this places GPS position
+                NextPlaceDialog.this.dismiss();
+
+                if (mService.getLocation() != null) {
+                    MapActivity.setService(mService);
+                    Intent i = new Intent(((Activity)creatorInstance), MapActivity.class);
+                    startActivity(i);
+                } else
+                    Toast.makeText(((Activity)creatorInstance), getResources().getString(R.string.no_gps_signal), Toast.LENGTH_LONG).show();
             }
         });
     }

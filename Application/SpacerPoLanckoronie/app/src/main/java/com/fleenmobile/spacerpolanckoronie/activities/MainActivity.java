@@ -29,7 +29,6 @@ import com.fleenmobile.spacerpolanckoronie.adapters.MenuItemAdapter;
 import com.fleenmobile.spacerpolanckoronie.adapters.MyMenuItem;
 import com.fleenmobile.spacerpolanckoronie.fragments.AboutUsFragment;
 import com.fleenmobile.spacerpolanckoronie.fragments.HistoryFragment;
-import com.fleenmobile.spacerpolanckoronie.fragments.InterestingPlaceFlyweightFragment;
 import com.fleenmobile.spacerpolanckoronie.fragments.InterestingPlacesFragment;
 import com.fleenmobile.spacerpolanckoronie.fragments.NavFragment;
 import com.fleenmobile.spacerpolanckoronie.fragments.WalkFragment;
@@ -60,7 +59,6 @@ public class MainActivity extends ActionBarActivity implements IFragmentCommunic
     private List<MyMenuItem> menuItems;
 
     private BroadcastReceiver mMessageReceiver;
-    private List<InterestingPlaceFlyweightFragment> interestingPlaceFragments;
 
     private GPSService gpsService;
     private ServiceConnection connection;
@@ -107,7 +105,12 @@ public class MainActivity extends ActionBarActivity implements IFragmentCommunic
         // Start GPSService
         setupConnection();
 
+        // If this is MapActivity creating MainActivity than we have to select
+        // walk module
+        checkReasonOfCreation();
+
     }
+
 
     @Override
     protected void onResume() {
@@ -129,9 +132,6 @@ public class MainActivity extends ActionBarActivity implements IFragmentCommunic
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
 
         unbindService(connection);
-        if (gpsService != null)
-            gpsService.stopThread();
-
 
         super.onPause();
     }
@@ -253,9 +253,10 @@ public class MainActivity extends ActionBarActivity implements IFragmentCommunic
     private void selectMenuItem(int position) {
         // Use GPSThread which sends broadcast about being in range of interesting
         // places only when we're in WalkFragment
-        if (position == 0 && gpsService != null)
+        if (position == 0 && gpsService != null) {
             gpsService.startThread();
-        else if (gpsService != null)
+            GPSService.setWalkStarted(false);
+        } else if (gpsService != null)
             gpsService.stopThread();
 
         // Insert the fragment by replacing any existing fragment
@@ -304,10 +305,11 @@ public class MainActivity extends ActionBarActivity implements IFragmentCommunic
 
                 // Set data and start thread sending broadcasts about
                 // going in range of any interesting places
-                List<Fragment> flyweightFragmets = ((WalkFragment) fragments[0]).getFragments();
                 List<InterestingPlace> interestingPlaces = Utils.getInterestingPlaces(MainActivity.this);
-                gpsService.setFragments(flyweightFragmets);
                 gpsService.setInterestingPlaces(interestingPlaces);
+
+                // Supply walk fragment with GPS service because it's needed for MapActivity
+                ((WalkFragment) fragments[0]).setService(gpsService);
             }
 
             @Override
@@ -315,6 +317,23 @@ public class MainActivity extends ActionBarActivity implements IFragmentCommunic
                 gpsService = null;
             }
         };
+
+    }
+
+    private void checkReasonOfCreation() {
+        Intent i = getIntent();
+        String mapActivityCreating = i.getStringExtra(Utils.MAP_ACTIVITY);
+
+        if (mapActivityCreating != null) {
+            selectMenuItem(0);
+
+            // Don't repeat the walk
+            GPSService.setWalkStarted(true);
+
+            // Set the place that the user is currently in range of
+            int idx = i.getIntExtra(Utils.INTERESTING_PLACE_BROADCAST, 0);
+            ((WalkFragment)fragments[0]).setFragment(idx);
+        }
 
     }
 

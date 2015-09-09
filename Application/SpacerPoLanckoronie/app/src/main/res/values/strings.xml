@@ -29,4 +29,6 @@
     <string name="walk_title">To start the walk, go to Gminny Ośrodek Kultury in Lanckorona</string>
     <string name="next_place_dialog_title">Next place</string>
     <string name="next_place_dialog_button">Show map</string>
+    <string name="out_of_map">You\'re out of map ;)</string>
+    <string name="no_gps_signal">There is no GPS signal ;(</string>
 </resources>

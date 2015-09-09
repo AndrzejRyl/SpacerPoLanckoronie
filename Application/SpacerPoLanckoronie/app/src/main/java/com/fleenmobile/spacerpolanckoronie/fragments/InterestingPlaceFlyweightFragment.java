@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.fleenmobile.spacerpolanckoronie.GPSUtils.GPSService;
 import com.fleenmobile.spacerpolanckoronie.R;
 import com.fleenmobile.spacerpolanckoronie.Utils;
 import com.fleenmobile.spacerpolanckoronie.activities.IFragmentCommunication;
@@ -28,6 +29,7 @@ public class InterestingPlaceFlyweightFragment extends Fragment {
     @NonNull
     private InterestingPlace place;
     private IFragmentCommunication mActivity;
+    private GPSService service;
 
     private RobotoTextView name, content;
     private ImageView image;
@@ -125,6 +127,10 @@ public class InterestingPlaceFlyweightFragment extends Fragment {
         this.nextPlace = place;
     }
 
+    public void setService(GPSService service) {
+        this.service = service;
+    }
+
     /**
      * Set arrow to take the user back to "Interesting places" card
      */
@@ -164,7 +170,7 @@ public class InterestingPlaceFlyweightFragment extends Fragment {
     // him to see the map with this place marked
     private void goToNextPlace() {
         if (nextPlace != null) {
-            dialog = NextPlaceDialog.newInstance(mActivity, nextPlace);
+            dialog = NextPlaceDialog.newInstance(mActivity, nextPlace, service);
             dialog.show(((Activity) mActivity).getFragmentManager(), "Next place dialog");
         } else {
             // TODO: Show info about the honey man ;)

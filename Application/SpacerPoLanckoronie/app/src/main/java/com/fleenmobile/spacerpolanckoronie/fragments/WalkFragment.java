@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.fleenmobile.spacerpolanckoronie.GPSUtils.GPSService;
 import com.fleenmobile.spacerpolanckoronie.R;
 import com.fleenmobile.spacerpolanckoronie.Utils;
 import com.fleenmobile.spacerpolanckoronie.activities.IFragmentCommunication;
@@ -29,6 +30,7 @@ import java.util.List;
 public class WalkFragment extends Fragment {
 
     private IFragmentCommunication mActivity;
+    private GPSService mService;
 
     private List<InterestingPlace> interestingPlaces;
     private List<Fragment> fragments;
@@ -84,6 +86,10 @@ public class WalkFragment extends Fragment {
         startActivity(intent);
     }
 
+    public void setService (GPSService service) {
+        mService = service;
+    }
+
     private void prepareFragments() {
         InterestingPlaceFlyweightFragment fragment;
         fragments = new ArrayList<>();
@@ -93,6 +99,7 @@ public class WalkFragment extends Fragment {
             fragment = new InterestingPlaceFlyweightFragment();
             fragment.setPlace(interestingPlaces.get(i));
             fragment.setNextPlace(interestingPlaces.get(i + 1));
+            fragment.setService(mService);
 
             // Set the mode in which FAB is visible but arrow
             // taking the user back to this fragment isn't
@@ -103,6 +110,7 @@ public class WalkFragment extends Fragment {
         // Add last fragment without next place (this is the end of the walk)
         fragment = new InterestingPlaceFlyweightFragment();
         fragment.setPlace(interestingPlaces.get(i));
+        fragment.setService(mService);
         fragment.setNextPlace(null);
 
         // Set the mode in which FAB is visible but arrow

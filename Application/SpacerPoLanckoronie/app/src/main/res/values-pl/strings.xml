@@ -22,5 +22,7 @@
     <string name="walk_title">Aby rozpocząc spacer, przejdź pod Gminny Ośrodek Kultury w Lanckoronie</string>
     <string name="next_place_dialog_title">Następne miejsce</string>
     <string name="next_place_dialog_button">Pokaż mapę</string>
+    <string name="out_of_map">You\'re out of map ;)</string>
+    <string name="no_gps_signal">There is no GPS signal ;(</string>
 
 </resources>

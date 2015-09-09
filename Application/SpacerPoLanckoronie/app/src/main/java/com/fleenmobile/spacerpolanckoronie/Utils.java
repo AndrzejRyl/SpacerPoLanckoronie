@@ -23,6 +23,7 @@ public class Utils {
     public static final String INTERESTING_PLACE_MODE = "interesting place mode";
     public static final String WALK_MODE = "walk mode";
     public static final String INTERESTING_PLACE_BROADCAST = "interesting place broadcast";
+    public static final String MAP_ACTIVITY = "map activity";
 
     /**
      * Checks whether the GPS is turned on
