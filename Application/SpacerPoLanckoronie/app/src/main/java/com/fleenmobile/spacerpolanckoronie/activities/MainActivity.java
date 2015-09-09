@@ -62,6 +62,7 @@ public class MainActivity extends ActionBarActivity implements IFragmentCommunic
 
     private GPSService gpsService;
     private ServiceConnection connection;
+    private boolean gpsShouldStart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +96,7 @@ public class MainActivity extends ActionBarActivity implements IFragmentCommunic
             @Override
             public void onReceive(Context context, Intent intent) {
                 // Extract data included in the Intent
-                int idx = intent.getIntExtra("idx", 0);
+                int idx = intent.getIntExtra(Utils.INTERESTING_PLACE_BROADCAST, 0);
 
                 // Tell walk fragment which interesting place it should set
                 ((WalkFragment) fragments[0]).setFragment(idx);
@@ -251,6 +252,7 @@ public class MainActivity extends ActionBarActivity implements IFragmentCommunic
      * Swaps fragments in the main content view
      */
     private void selectMenuItem(int position) {
+        gpsShouldStart = (position == 0) ? true : false;
         // Use GPSThread which sends broadcast about being in range of interesting
         // places only when we're in WalkFragment
         if (position == 0 && gpsService != null) {
@@ -264,6 +266,7 @@ public class MainActivity extends ActionBarActivity implements IFragmentCommunic
         fragmentManager.beginTransaction()
                 .replace(R.id.content_frame, fragments[position])
                 .commit();
+        fragmentManager.executePendingTransactions();
 
         // Highlight the selected item, update the title, and close the drawer
         mDrawerList.setItemChecked(position, true);
@@ -310,6 +313,9 @@ public class MainActivity extends ActionBarActivity implements IFragmentCommunic
 
                 // Supply walk fragment with GPS service because it's needed for MapActivity
                 ((WalkFragment) fragments[0]).setService(gpsService);
+
+                if (gpsShouldStart)
+                    gpsService.startThread();
             }
 
             @Override

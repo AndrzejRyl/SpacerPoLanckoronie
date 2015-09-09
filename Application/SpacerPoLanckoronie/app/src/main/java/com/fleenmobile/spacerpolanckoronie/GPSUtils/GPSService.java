@@ -163,7 +163,7 @@ public class GPSService extends Service {
         Intent intent = new Intent(Utils.INTERESTING_PLACE_BROADCAST);
 
         // Add data
-        intent.putExtra("idx", interestingPlaces.indexOf(place));
+        intent.putExtra(Utils.INTERESTING_PLACE_BROADCAST, interestingPlaces.indexOf(place));
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 }

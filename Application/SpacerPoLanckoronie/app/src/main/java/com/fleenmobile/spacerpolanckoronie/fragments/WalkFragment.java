@@ -6,6 +6,7 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,6 +89,10 @@ public class WalkFragment extends Fragment {
 
     public void setService (GPSService service) {
         mService = service;
+
+        if (fragments != null)
+            for (Fragment f : fragments)
+                ((InterestingPlaceFlyweightFragment)f).setService(mService);
     }
 
     private void prepareFragments() {
@@ -126,6 +131,7 @@ public class WalkFragment extends Fragment {
         fragmentManager.beginTransaction()
                 .replace(R.id.content_frame, fragments.get(idx))
                 .commit();
+        fragmentManager.executePendingTransactions();
     }
 
     public List<Fragment> getFragments() {

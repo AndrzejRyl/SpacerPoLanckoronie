@@ -94,6 +94,7 @@ public class InterestingPlacesFragment extends Fragment {
         fragmentManager.beginTransaction()
                 .replace(R.id.content_frame, fragments.get(position))
                 .commit();
+        fragmentManager.executePendingTransactions();
 
     }
 

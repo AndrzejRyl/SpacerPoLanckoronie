@@ -61,6 +61,8 @@ public class MapActivity extends ActionBarActivity {
                 i.putExtra(Utils.MAP_ACTIVITY, "");
                 i.putExtra(Utils.INTERESTING_PLACE_BROADCAST, intent.getIntExtra(Utils.INTERESTING_PLACE_BROADCAST, 0));
                 startActivity(i);
+
+                finish();
             }
         };
 
