@@ -26,4 +26,5 @@
     <string name="place3_name">Willa Tadeusz</string>
     <string name="place3_description">Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula. Ut molestie a, ultricies porta urna. Vestibulum commodo volutpat a, convallis ac, laoreet enim. Phasellus fermentum in, dolor. Pellentesque facilisis. Nulla imperdiet sit amet magna. Vestibulum dapibus, mauris nec malesuada fames ac turpis velit, rhoncus eu, luctus et interdum adipiscing wisi. Aliquam erat ac ipsum. Integer aliquam purus.</string>
     <string name="card_interesting_place_button">MORE</string>
+    <string name="walk_title">To start the walk, go to Gminny Ośrodek Kultury in Lanckorona</string>
 </resources>

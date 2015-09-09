@@ -218,4 +218,13 @@ public class MainActivity extends ActionBarActivity implements IFragmentCommunic
         ((NavFragment)fragments[3]).startNavSystem();
     }
 
+    /**
+     * Start navigation system with the destination set for
+     * the beginning of the walk
+     * @param v Button 'navigation'
+     */
+    public void navigateToStart(View v) {
+        ((WalkFragment)fragments[0]).navigateToStart();
+    }
+
 }
