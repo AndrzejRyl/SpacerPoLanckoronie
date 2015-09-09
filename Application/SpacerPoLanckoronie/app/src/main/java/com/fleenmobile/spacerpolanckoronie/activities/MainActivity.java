@@ -64,7 +64,7 @@ public class MainActivity extends ActionBarActivity implements IFragmentCommunic
 
     private GPSService gpsService;
     private ServiceConnection connection;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,10 +118,8 @@ public class MainActivity extends ActionBarActivity implements IFragmentCommunic
                 new IntentFilter(Utils.INTERESTING_PLACE_BROADCAST));
 
         // Bind to GPS service
-        if (Utils.GPSOn(this)) {
-            Intent i = new Intent(this, GPSService.class);
-            bindService(i, connection, Context.BIND_AUTO_CREATE);
-        }
+        Intent i = new Intent(this, GPSService.class);
+        bindService(i, connection, Context.BIND_AUTO_CREATE);
 
     }
 
@@ -298,12 +296,6 @@ public class MainActivity extends ActionBarActivity implements IFragmentCommunic
     }
 
     private void setupConnection() {
-        // If there is no GPS, prompt user for turning it on
-        if (!Utils.GPSOn(this)) {
-            Utils.showGPSDialog(this);
-            return;
-        }
-
         connection = new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {

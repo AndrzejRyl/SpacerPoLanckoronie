@@ -55,6 +55,17 @@ public class WalkFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        // If there is no GPS, prompt user for turning it on
+        if (!Utils.GPSOn(this.getActivity())) {
+            Utils.showGPSDialog(this.getActivity());
+        }
+
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -68,11 +79,6 @@ public class WalkFragment extends Fragment {
      * the walk
      */
     public void navigateToStart() {
-        if (!Utils.GPSOn(this.getActivity())) {
-            Utils.showGPSDialog(this.getActivity());
-            return;
-        }
-
         Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
                 Uri.parse("http://maps.google.com/maps?daddr=49.845310,19.718493"));
         startActivity(intent);
