@@ -15,6 +15,9 @@ import com.fleenmobile.spacerpolanckoronie.Utils;
 import com.fleenmobile.spacerpolanckoronie.activities.IFragmentCommunication;
 
 /**
+ * This is a fragment giving the user the possibility to use his own
+ * navigation system to get to Lanckorona
+ *
  * @author FleenMobile at 2015-08-22
  */
 public class NavFragment extends Fragment {

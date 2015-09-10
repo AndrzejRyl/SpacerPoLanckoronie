@@ -58,7 +58,7 @@ public class Utils {
     public static List<InterestingPlace> getInterestingPlaces(Context context) {
         List<InterestingPlace> result = new ArrayList<>();
         Resources resources = context.getResources();
-        // TODO: Change to real data
+
         result.add(
                 new InterestingPlace(
                         resources.getString(R.string.place1_name),
@@ -106,7 +106,7 @@ public class Utils {
                         R.drawable.place6,
                         R.raw.place6,
                         new GPSPoint(49.847889, 19.716184),
-                        new GPSRange(new GPSPoint(49.847713, 19.715976), new GPSPoint(49.848066, 19.716302))));
+                        new GPSRange(new GPSPoint(49.847713, 19.715976), new GPSPoint(49.848287, 19.716517))));
         result.add(
                 new InterestingPlace(
                         resources.getString(R.string.place7_name),

@@ -18,6 +18,7 @@ import com.fleenmobile.spacerpolanckoronie.Utils;
 import com.fleenmobile.spacerpolanckoronie.activities.IFragmentCommunication;
 import com.fleenmobile.spacerpolanckoronie.activities.MainActivity;
 import com.fleenmobile.spacerpolanckoronie.adapters.InterestingPlace;
+import com.fleenmobile.spacerpolanckoronie.dialogs.EndDialog;
 import com.fleenmobile.spacerpolanckoronie.dialogs.NextPlaceDialog;
 import com.fleenmobile.spacerpolanckoronie.fonts.RobotoTextView;
 
@@ -42,6 +43,7 @@ public class InterestingPlaceFlyweightFragment extends Fragment {
     private ImageButton FAB;
     private String mode = "";
     private NextPlaceDialog dialog;
+    private EndDialog endDialog;
 
     @Override
     public void onAttach(Activity activity) {
@@ -98,6 +100,9 @@ public class InterestingPlaceFlyweightFragment extends Fragment {
 
         if (dialog != null && dialog.isVisible())
             dialog.dismiss();
+
+        if (endDialog != null && endDialog.isVisible())
+            endDialog.dismiss();
     }
 
     private void playSound() {
@@ -173,7 +178,8 @@ public class InterestingPlaceFlyweightFragment extends Fragment {
             dialog = NextPlaceDialog.newInstance(mActivity, nextPlace, service);
             dialog.show(((Activity) mActivity).getFragmentManager(), "Next place dialog");
         } else {
-            // TODO: Show info about the honey man ;)
+            endDialog = EndDialog.newInstance(mActivity);
+            endDialog.show(((Activity) mActivity).getFragmentManager(), "End dialog");
         }
     }
 

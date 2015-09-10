@@ -21,9 +21,9 @@
     <string name="card_interesting_place_button">WIĘCEJ</string>
     <string name="walk_title">Aby rozpocząc spacer, przejdź pod Gminny Ośrodek Kultury w Lanckoronie</string>
     <string name="next_place_dialog_title">Następne miejsce</string>
-    <string name="next_place_dialog_button">Pokaż mapę</string>
-    <string name="out_of_map">You\'re out of map ;)</string>
-    <string name="no_gps_signal">There is no GPS signal ;(</string>
+    <string name="next_place_dialog_button">POKAŻ MAPĘ</string>
+    <string name="out_of_map">Jesteś poza mapą ;(</string>
+    <string name="no_gps_signal">Brak sygnału GPS ;(</string>
     <string name="place4_name">Ogród Willi Zamek</string>
     <string name="place5_name">Willa Zamek</string>
     <string name="place6_name">Willa Bajka</string>
@@ -32,5 +32,9 @@
     <string name="place5_description">Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula. Ut molestie a, ultricies porta urna. Vestibulum commodo volutpat a, convallis ac, laoreet enim. Phasellus fermentum in, dolor. Pellentesque facilisis. Nulla imperdiet sit amet magna. Vestibulum dapibus, mauris nec malesuada fames ac turpis velit, rhoncus eu, luctus et interdum adipiscing wisi. Aliquam erat ac ipsum. Integer aliquam purus.</string>
     <string name="place6_description">Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula. Ut molestie a, ultricies porta urna. Vestibulum commodo volutpat a, convallis ac, laoreet enim. Phasellus fermentum in, dolor. Pellentesque facilisis. Nulla imperdiet sit amet magna. Vestibulum dapibus, mauris nec malesuada fames ac turpis velit, rhoncus eu, luctus et interdum adipiscing wisi. Aliquam erat ac ipsum. Integer aliquam purus.</string>
     <string name="place7_description">Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula. Ut molestie a, ultricies porta urna. Vestibulum commodo volutpat a, convallis ac, laoreet enim. Phasellus fermentum in, dolor. Pellentesque facilisis. Nulla imperdiet sit amet magna. Vestibulum dapibus, mauris nec malesuada fames ac turpis velit, rhoncus eu, luctus et interdum adipiscing wisi. Aliquam erat ac ipsum. Integer aliquam purus.</string>
+    <string name="end_walk_dialog_title">To już koniec ;(</string>
+    <string name="end_walk_content">Jeśli lubisz domowy miód, to zapraszamy do naszego lokalnego pszczelarza. To tylko 10 min drogi stąd ;)</string>
+    <string name="end_walk_dialog_button">NAWIGACJA</string>
+    <string name="app_name">Lanckorona walk</string>
 
 </resources>

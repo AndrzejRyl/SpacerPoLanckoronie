@@ -25,7 +25,7 @@
     <string name="card_interesting_place_button">MORE</string>
     <string name="walk_title">To start the walk, go to Gminny Ośrodek Kultury in Lanckorona</string>
     <string name="next_place_dialog_title">Next place</string>
-    <string name="next_place_dialog_button">Show map</string>
+    <string name="next_place_dialog_button">SHOW MAP</string>
     <string name="out_of_map">You\'re out of map ;)</string>
     <string name="no_gps_signal">There is no GPS signal ;(</string>
     <string name="place1_name">Mural</string>
@@ -39,4 +39,7 @@
     <string name="place5_description">Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula. Ut molestie a, ultricies porta urna. Vestibulum commodo volutpat a, convallis ac, laoreet enim. Phasellus fermentum in, dolor. Pellentesque facilisis. Nulla imperdiet sit amet magna. Vestibulum dapibus, mauris nec malesuada fames ac turpis velit, rhoncus eu, luctus et interdum adipiscing wisi. Aliquam erat ac ipsum. Integer aliquam purus.</string>
     <string name="place6_description">Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula. Ut molestie a, ultricies porta urna. Vestibulum commodo volutpat a, convallis ac, laoreet enim. Phasellus fermentum in, dolor. Pellentesque facilisis. Nulla imperdiet sit amet magna. Vestibulum dapibus, mauris nec malesuada fames ac turpis velit, rhoncus eu, luctus et interdum adipiscing wisi. Aliquam erat ac ipsum. Integer aliquam purus.</string>
     <string name="place7_description">Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula. Ut molestie a, ultricies porta urna. Vestibulum commodo volutpat a, convallis ac, laoreet enim. Phasellus fermentum in, dolor. Pellentesque facilisis. Nulla imperdiet sit amet magna. Vestibulum dapibus, mauris nec malesuada fames ac turpis velit, rhoncus eu, luctus et interdum adipiscing wisi. Aliquam erat ac ipsum. Integer aliquam purus.</string>
+    <string name="end_walk_dialog_title">This is the end ;(</string>
+    <string name="end_walk_content">If you like homemade honey, we encourage you to visit our local beekeper. It\'s only 10 mins away ;)</string>
+    <string name="end_walk_dialog_button">NAVIGATION</string>
 </resources>
