@@ -20,4 +20,11 @@
         android:layout_height="wrap_content"
         android:src="@mipmap/ic_place_black_24dp"
         android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/map_destination_position"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_place_black_24dp"
+        android:visibility="invisible" />
 </RelativeLayout>

@@ -4,8 +4,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.location.Location;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
@@ -19,6 +19,7 @@ import com.fleenmobile.spacerpolanckoronie.GPSUtils.GPSRange;
 import com.fleenmobile.spacerpolanckoronie.GPSUtils.GPSService;
 import com.fleenmobile.spacerpolanckoronie.R;
 import com.fleenmobile.spacerpolanckoronie.Utils;
+import com.fleenmobile.spacerpolanckoronie.adapters.InterestingPlace;
 
 /**
  * This is an activity which shows a map with user's current location
@@ -28,11 +29,17 @@ import com.fleenmobile.spacerpolanckoronie.Utils;
  */
 public class MapActivity extends ActionBarActivity {
 
+    @NonNull
     private static GPSService mService;
+    @NonNull
+    private static InterestingPlace mDestination;
 
-    private ImageView mark, map;
+    private static final int DESTINATION_MARK = 0;
+    private static final int USER_MARK = 1;
+
+    private ImageView mark, destinationMark, map;
     private int mapWidth, mapHeight, markWidth, markHeight;
-    private int marginLeft, marginTop;
+    private int marginLeft, marginTop, destinationMarginLeft, destinationMarginTop;
     private GPSRange mapRange = new GPSRange(new GPSPoint(49.842297, 19.711905), new GPSPoint(49.851165, 19.719651));
     private final boolean[] onMap = {true};
 
@@ -48,6 +55,7 @@ public class MapActivity extends ActionBarActivity {
         // Find views
         map = (ImageView) findViewById(R.id.map);
         mark = (ImageView) findViewById(R.id.map_position);
+        destinationMark = (ImageView) findViewById(R.id.map_destination_position);
 
         // Get size of map and mark
         getMarkSize();
@@ -89,12 +97,12 @@ public class MapActivity extends ActionBarActivity {
     }
 
     private void getMarkSize() {
-        ViewTreeObserver vto = mark.getViewTreeObserver();
+        ViewTreeObserver vto = destinationMark.getViewTreeObserver();
         vto.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             public boolean onPreDraw() {
-                mark.getViewTreeObserver().removeOnPreDrawListener(this);
-                markHeight = mark.getMeasuredHeight();
-                markWidth = mark.getMeasuredWidth();
+                destinationMark.getViewTreeObserver().removeOnPreDrawListener(this);
+                markHeight = destinationMark.getMeasuredHeight();
+                markWidth = destinationMark.getMeasuredWidth();
 
                 return true;
             }
@@ -115,12 +123,32 @@ public class MapActivity extends ActionBarActivity {
         });
     }
 
+    // Sets a mark for destination on the map
+    private void setDestinationMark() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                // Set location mark visible
+                destinationMark.setVisibility(View.VISIBLE);
+
+                // Calculate margins on a basis of size of a map, size of a mark and GPS mark
+                calculateMargins(DESTINATION_MARK);
+
+                // Set location mark on a map
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                params.setMargins(destinationMarginLeft, destinationMarginTop, 0, 0);
+                destinationMark.setLayoutParams(params);
+            }
+        });
+    }
+
     private void startUpdatingGPS() {
         GPSThread = new Thread(new Runnable() {
             @Override
             public void run() {
                 while (true) {
                     setLocation();
+                    setDestinationMark();
 
                     try {
                         Thread.sleep(2000);
@@ -147,7 +175,7 @@ public class MapActivity extends ActionBarActivity {
                     mark.setVisibility(View.VISIBLE);
 
                     // Calculate margins on a basis of size of a map, size of a mark and GPS mark
-                    calculateMargins();
+                    calculateMargins(USER_MARK);
 
                     // Set location mark on a map
                     RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
@@ -169,10 +197,16 @@ public class MapActivity extends ActionBarActivity {
 
     }
 
-    private void calculateMargins() {
-        Location location = mService.getLocation();
-        double latitude = location.getLatitude();
-        double longitude = location.getLongitude();
+    private void calculateMargins(int mark) {
+        // Get longitude, latitude of user or his destination
+        double latitude, longitude;
+        if (mark == DESTINATION_MARK) {
+            latitude = mDestination.getCoordinates().getLatitude();
+            longitude = mDestination.getCoordinates().getLongitude();
+        } else {
+            latitude = mService.getLocation().getLatitude();
+            longitude = mService.getLocation().getLongitude();
+        }
 
         double topographicWidth = mapRange.getRightTop().getLongitude() - mapRange.getLeftBottom().getLongitude();
         double topographicHeight = mapRange.getRightTop().getLatitude() - mapRange.getLeftBottom().getLatitude();
@@ -183,12 +217,21 @@ public class MapActivity extends ActionBarActivity {
         double longitudePercentage = topoghrapicLongitudeDelta / topographicWidth;
         double latitudePercentage = topoghrapicLatitudeDelta / topographicHeight;
 
-        marginLeft = (int) (longitudePercentage * mapWidth) - markWidth;
-        marginTop = mapHeight - (int) (latitudePercentage * mapHeight) - markHeight;
+        if (mark == DESTINATION_MARK) {
+            destinationMarginLeft = (int) (longitudePercentage * mapWidth) - markWidth;
+            destinationMarginTop = mapHeight - (int) (latitudePercentage * mapHeight) - markHeight;
+        } else {
+            marginLeft = (int) (longitudePercentage * mapWidth) - markWidth;
+            marginTop = mapHeight - (int) (latitudePercentage * mapHeight) - markHeight;
+        }
     }
 
 
     public static void setService(GPSService service) {
         mService = service;
+    }
+
+    public static void setDestination(InterestingPlace destination) {
+        mDestination = destination;
     }
 }

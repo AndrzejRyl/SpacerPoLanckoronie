@@ -128,7 +128,7 @@ public class InterestingPlaceFlyweightFragment extends Fragment {
     }
 
     public void setService(GPSService service) {
-        this.service = service;;
+        this.service = service;
     }
 
     /**

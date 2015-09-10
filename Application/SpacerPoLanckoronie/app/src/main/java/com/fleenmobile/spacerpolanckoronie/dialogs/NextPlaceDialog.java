@@ -71,7 +71,6 @@ public class NextPlaceDialog extends DialogFragment{
         // Set data (name of the interesting place and it's picture as well as onClickListener)
         setData();
 
-
         return view;
     }
 
@@ -87,6 +86,7 @@ public class NextPlaceDialog extends DialogFragment{
 
                 if (mService.getLocation() != null) {
                     MapActivity.setService(mService);
+                    MapActivity.setDestination(mPlace);
                     Intent i = new Intent(((Activity)creatorInstance), MapActivity.class);
                     startActivity(i);
                 } else
