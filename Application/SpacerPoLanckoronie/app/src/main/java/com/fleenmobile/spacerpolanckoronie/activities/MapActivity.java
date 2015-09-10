@@ -80,6 +80,9 @@ public class MapActivity extends ActionBarActivity {
     protected void onResume() {
         super.onResume();
 
+        if(mService != null)
+            mService.setAppPaused(false);
+
         // Register mMessageReceiver to receive messages.
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
                 new IntentFilter(Utils.INTERESTING_PLACE_BROADCAST));
@@ -88,6 +91,9 @@ public class MapActivity extends ActionBarActivity {
     @Override
     protected void onPause() {
         super.onPause();
+
+        if(mService != null)
+            mService.setAppPaused(true);
 
         // Unregister since the activity is not visible
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);

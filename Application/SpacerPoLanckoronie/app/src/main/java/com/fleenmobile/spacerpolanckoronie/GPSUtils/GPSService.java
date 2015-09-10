@@ -36,6 +36,7 @@ public class GPSService extends Service {
     private InterestingPlacesThread interestingPlacesThread;
 
     private static boolean mWalkStarted = false;
+    private boolean appPaused = false;
 
 
     @Override
@@ -157,9 +158,16 @@ public class GPSService extends Service {
         }
     }
 
+    public void setAppPaused(boolean appPaused) {
+        this.appPaused = appPaused;
+    }
+
     // Sends a broadcast informing activities that user has
     // just gone into the range of the given place
     private void sendMyBroadcast(InterestingPlace place) {
+        // Wait for the app to be alive again
+        while (appPaused);
+
         Intent intent = new Intent(Utils.INTERESTING_PLACE_BROADCAST);
 
         // Add data

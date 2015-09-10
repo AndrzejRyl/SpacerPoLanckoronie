@@ -117,6 +117,9 @@ public class MainActivity extends ActionBarActivity implements IFragmentCommunic
     protected void onResume() {
         super.onResume();
 
+        if(gpsService != null)
+            gpsService.setAppPaused(false);
+
         // Register mMessageReceiver to receive messages.
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
                 new IntentFilter(Utils.INTERESTING_PLACE_BROADCAST));
@@ -129,6 +132,10 @@ public class MainActivity extends ActionBarActivity implements IFragmentCommunic
 
     @Override
     protected void onPause() {
+
+        if(gpsService != null)
+            gpsService.setAppPaused(true);
+
         // Unregister since the activity is not visible
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
 
