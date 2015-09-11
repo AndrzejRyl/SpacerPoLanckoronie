@@ -24,7 +24,9 @@ public class Utils {
     public static final String WALK_MODE = "walk mode";
     public static final String INTERESTING_PLACE_BROADCAST = "interesting place broadcast";
     public static final String MAP_ACTIVITY = "map activity";
+    public static final String BEGINNING_FLAG = "beginning";
     public static boolean soundOn = true;
+    private static GPSRange mapRange = new GPSRange(new GPSPoint(49.842297, 19.711905), new GPSPoint(49.851165, 19.719651));;
 
     /**
      * Checks whether the GPS is turned on
@@ -118,5 +120,9 @@ public class Utils {
                         new GPSRange(new GPSPoint(49.847489, 19.711997), new GPSPoint(49.848200, 19.713120))));
 
         return result;
+    }
+
+    public static GPSRange getMapRange() {
+        return mapRange;
     }
 }

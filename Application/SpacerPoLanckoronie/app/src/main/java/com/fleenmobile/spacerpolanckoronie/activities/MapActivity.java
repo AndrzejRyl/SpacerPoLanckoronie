@@ -14,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.fleenmobile.spacerpolanckoronie.GPSUtils.GPSPoint;
 import com.fleenmobile.spacerpolanckoronie.GPSUtils.GPSRange;
 import com.fleenmobile.spacerpolanckoronie.GPSUtils.GPSService;
 import com.fleenmobile.spacerpolanckoronie.R;
@@ -40,12 +39,14 @@ public class MapActivity extends ActionBarActivity {
     private ImageView mark, destinationMark, map;
     private int mapWidth, mapHeight, markWidth, markHeight;
     private int marginLeft, marginTop, destinationMarginLeft, destinationMarginTop;
-    private GPSRange mapRange = new GPSRange(new GPSPoint(49.842297, 19.711905), new GPSPoint(49.851165, 19.719651));
+    private GPSRange mapRange = Utils.getMapRange();
     private final boolean[] onMap = {true};
 
     private BroadcastReceiver mMessageReceiver;
 
     private Thread GPSThread;
+
+    private boolean beginningFlag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,9 +62,18 @@ public class MapActivity extends ActionBarActivity {
         getMarkSize();
         getMapSize();
 
+        // Check if this a beginning of a walk
+        if (getIntent().getStringExtra(Utils.BEGINNING_FLAG) != null)
+            beginningFlag = true;
+
         mMessageReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
+                // If this is the beginning of a walk MainActivity is started
+                // only when the user reaches first interesting place
+                if (beginningFlag && intent.getIntExtra(Utils.INTERESTING_PLACE_BROADCAST, 0) != 0)
+                    return;
+
                 // Start MainActivity and set it to walk module
                 Intent i = new Intent(MapActivity.this, MainActivity.class);
                 i.putExtra(Utils.MAP_ACTIVITY, "");

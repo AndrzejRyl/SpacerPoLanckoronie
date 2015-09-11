@@ -4,16 +4,19 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.fleenmobile.spacerpolanckoronie.GPSUtils.GPSRange;
 import com.fleenmobile.spacerpolanckoronie.GPSUtils.GPSService;
 import com.fleenmobile.spacerpolanckoronie.R;
 import com.fleenmobile.spacerpolanckoronie.Utils;
 import com.fleenmobile.spacerpolanckoronie.activities.IFragmentCommunication;
+import com.fleenmobile.spacerpolanckoronie.activities.MapActivity;
 import com.fleenmobile.spacerpolanckoronie.adapters.InterestingPlace;
 
 import java.util.ArrayList;
@@ -84,17 +87,31 @@ public class WalkFragment extends Fragment {
      * the walk
      */
     public void navigateToStart() {
-        Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                Uri.parse("http://maps.google.com/maps?daddr=49.845310,19.718493"));
-        startActivity(intent);
+        InterestingPlace walkBeginning = interestingPlaces.get(0);
+        Location usersLocation = mService.getLocation();
+        GPSRange mapRange = Utils.getMapRange();
+
+        if (mapRange.inRange(usersLocation)) {
+            // If the user is on our map, show him our navigation
+            MapActivity.setService(mService);
+            MapActivity.setDestination(walkBeginning);
+            Intent i = new Intent(((Activity)mActivity), MapActivity.class);
+            i.putExtra(Utils.BEGINNING_FLAG, "");
+            startActivity(i);
+        } else {
+            // If he's outside show him a system navigation
+            Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                    Uri.parse("http://maps.google.com/maps?daddr=" + walkBeginning.getCoordinates().getLatitude() + "," + walkBeginning.getCoordinates().getLongitude()));
+            startActivity(intent);
+        }
     }
 
-    public void setService (GPSService service) {
+    public void setService(GPSService service) {
         mService = service;
 
         if (fragments != null)
             for (Fragment f : fragments)
-                ((InterestingPlaceFlyweightFragment)f).setService(mService);
+                ((InterestingPlaceFlyweightFragment) f).setService(mService);
     }
 
     private void prepareFragments() {
@@ -143,7 +160,7 @@ public class WalkFragment extends Fragment {
     public void soundChange(boolean soundOn) {
         // Inform every flyweight fragment about the change
         for (Fragment f : fragments) {
-            ((InterestingPlaceFlyweightFragment)f).soundChange(soundOn);
+            ((InterestingPlaceFlyweightFragment) f).soundChange(soundOn);
         }
     }
 }
