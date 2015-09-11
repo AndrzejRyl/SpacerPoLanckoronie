@@ -111,6 +111,7 @@ public class GPSService extends Service {
     public void stopThread() {
         if (interestingPlacesThread != null)
             interestingPlacesThread.interrupt();
+        interestingPlaceInRange = null;
     }
 
     /**

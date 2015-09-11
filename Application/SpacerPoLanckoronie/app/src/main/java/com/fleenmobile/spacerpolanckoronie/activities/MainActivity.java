@@ -302,6 +302,7 @@ public class MainActivity extends ActionBarActivity implements IFragmentCommunic
         // Use GPSThread which sends broadcast about being in range of interesting
         // places only when we're in WalkFragment
         if (position == 0 && gpsService != null) {
+            gpsService.stopThread();
             gpsService.startThread();
             GPSService.setWalkStarted(false);
         } else if (gpsService != null)
