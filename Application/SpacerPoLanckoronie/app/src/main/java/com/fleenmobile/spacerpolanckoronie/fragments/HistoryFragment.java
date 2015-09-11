@@ -44,5 +44,7 @@ public class HistoryFragment extends Fragment {
     }
 
 
-
+    public void soundChange(boolean soundOn) {
+        // TODO: Mute or unmute the media player
+    }
 }

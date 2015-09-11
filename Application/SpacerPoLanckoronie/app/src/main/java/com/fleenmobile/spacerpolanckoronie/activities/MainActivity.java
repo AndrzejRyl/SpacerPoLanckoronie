@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.res.Configuration;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.content.LocalBroadcastManager;
@@ -18,6 +19,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -51,6 +53,7 @@ public class MainActivity extends ActionBarActivity implements IFragmentCommunic
     private ActionBarDrawerToggle mDrawerToggle;
     private ListView mDrawerList;
     private TextView mToolbarTitleTV;
+    private ImageView mSound;
 
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
@@ -81,6 +84,7 @@ public class MainActivity extends ActionBarActivity implements IFragmentCommunic
 
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
         mToolbarTitleTV = (TextView) findViewById(R.id.toolbar_title);
+        mSound = (ImageView) findViewById(R.id.sound);
 
         // Set the adapter for the list view
         mDrawerList.setAdapter(new MenuItemAdapter(this,
@@ -91,6 +95,7 @@ public class MainActivity extends ActionBarActivity implements IFragmentCommunic
 
         initializeDrawerToggle();
         initializeFragments();
+        initializeSoundButton();
 
         mMessageReceiver = new BroadcastReceiver() {
             @Override
@@ -112,12 +117,11 @@ public class MainActivity extends ActionBarActivity implements IFragmentCommunic
 
     }
 
-
     @Override
     protected void onResume() {
         super.onResume();
 
-        if(gpsService != null)
+        if (gpsService != null)
             gpsService.setAppPaused(false);
 
         // Register mMessageReceiver to receive messages.
@@ -133,7 +137,7 @@ public class MainActivity extends ActionBarActivity implements IFragmentCommunic
     @Override
     protected void onPause() {
 
-        if(gpsService != null)
+        if (gpsService != null)
             gpsService.setAppPaused(true);
 
         // Unregister since the activity is not visible
@@ -174,6 +178,40 @@ public class MainActivity extends ActionBarActivity implements IFragmentCommunic
         selectMenuItem(2);
     }
 
+    private void initializeSoundButton() {
+        // Get current state of the device
+        AudioManager audio = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        if (audio.getRingerMode() == AudioManager.RINGER_MODE_SILENT ||
+                audio.getRingerMode() == AudioManager.RINGER_MODE_VIBRATE)
+            Utils.soundOn = false;
+
+        // Set sound button accordingly
+        if (Utils.soundOn) {
+            mSound.setImageResource(R.mipmap.ic_volume_up_white_24dp);
+        } else {
+            mSound.setImageResource(R.mipmap.ic_volume_off_white_24dp);
+        }
+
+        // Set listener to it
+        mSound.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Utils.soundOn) {
+                    mSound.setImageResource(R.mipmap.ic_volume_off_white_24dp);
+                    Utils.soundOn = false;
+                } else {
+                    mSound.setImageResource(R.mipmap.ic_volume_up_white_24dp);
+                    Utils.soundOn = true;
+                }
+
+                // Inform fragments about the change
+                ((WalkFragment) fragments[0]).soundChange(Utils.soundOn);
+                ((InterestingPlacesFragment) fragments[1]).soundChange(Utils.soundOn);
+                ((HistoryFragment) fragments[2]).soundChange(Utils.soundOn);
+            }
+        });
+    }
+
     private void initializeDrawerToggle() {
         final Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
@@ -206,6 +244,7 @@ public class MainActivity extends ActionBarActivity implements IFragmentCommunic
 
         // Set initial menu item name (History)
         setTitle(mTitle);
+
     }
 
     @Override
@@ -345,7 +384,7 @@ public class MainActivity extends ActionBarActivity implements IFragmentCommunic
 
             // Set the place that the user is currently in range of
             int idx = i.getIntExtra(Utils.INTERESTING_PLACE_BROADCAST, 0);
-            ((WalkFragment)fragments[0]).setFragment(idx);
+            ((WalkFragment) fragments[0]).setFragment(idx);
         }
 
     }

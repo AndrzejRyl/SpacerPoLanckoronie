@@ -108,6 +108,9 @@ public class InterestingPlaceFlyweightFragment extends Fragment {
     private void playSound() {
         mp = MediaPlayer.create(this.getActivity(), place.getAudio());
 
+        // Be sure to set the right mute/unmute state
+        soundChange(Utils.soundOn);
+
         mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
@@ -185,5 +188,14 @@ public class InterestingPlaceFlyweightFragment extends Fragment {
 
     public void setMode(String mode) {
         this.mode = mode;
+    }
+
+    public void soundChange(boolean soundOn) {
+        if (mp == null) return;
+        if (soundOn) {
+            mp.setVolume(1, 1);
+        } else {
+            mp.setVolume(0, 0);
+        }
     }
 }

@@ -27,8 +27,8 @@ public class InterestingPlacesFragment extends Fragment {
 
     private ListView list;
 
-    private List<InterestingPlace> interestingPlaces;
-    private List<InterestingPlaceFlyweightFragment> fragments;
+    private List<InterestingPlace> interestingPlaces = new ArrayList<>();
+    private List<InterestingPlaceFlyweightFragment> fragments = new ArrayList<>();
 
     /**
      * Required empty constructor
@@ -43,6 +43,9 @@ public class InterestingPlacesFragment extends Fragment {
 
         interestingPlaces = Utils.getInterestingPlaces(this.getActivity());
         initializeFragments();
+
+        // Set sound mute/unmute state in all flyweights
+        soundChange(Utils.soundOn);
     }
 
     private void initializeFragments() {
@@ -98,4 +101,10 @@ public class InterestingPlacesFragment extends Fragment {
 
     }
 
+    public void soundChange(boolean soundOn) {
+        // Inform every flyweight fragment about the change
+        for (InterestingPlaceFlyweightFragment f : fragments) {
+            f.soundChange(soundOn);
+        }
+    }
 }

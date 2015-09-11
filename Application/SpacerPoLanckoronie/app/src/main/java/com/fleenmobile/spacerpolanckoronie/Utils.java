@@ -24,6 +24,7 @@ public class Utils {
     public static final String WALK_MODE = "walk mode";
     public static final String INTERESTING_PLACE_BROADCAST = "interesting place broadcast";
     public static final String MAP_ACTIVITY = "map activity";
+    public static boolean soundOn = true;
 
     /**
      * Checks whether the GPS is turned on
@@ -83,7 +84,7 @@ public class Utils {
                         R.raw.place3,
                         new GPSPoint(49.850400, 19.716147),
                         new GPSRange(new GPSPoint(49.850227, 19.715931), new GPSPoint(49.850601, 19.716259))));
-        result.add(
+        /*result.add(
                 new InterestingPlace(
                         resources.getString(R.string.place4_name),
                         resources.getString(R.string.place4_description),
@@ -91,7 +92,7 @@ public class Utils {
                         R.raw.place4,
                         new GPSPoint(49.848454, 19.718972),
                         new GPSRange(new GPSPoint(49.848183, 19.718020), new GPSPoint(49.848765, 19.719274))));
-        result.add(
+        */result.add(
                 new InterestingPlace(
                         resources.getString(R.string.place5_name),
                         resources.getString(R.string.place5_description),

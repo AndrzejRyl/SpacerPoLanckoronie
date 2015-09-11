@@ -6,7 +6,6 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,8 +32,8 @@ public class WalkFragment extends Fragment {
     private IFragmentCommunication mActivity;
     private GPSService mService;
 
-    private List<InterestingPlace> interestingPlaces;
-    private List<Fragment> fragments;
+    private List<InterestingPlace> interestingPlaces = new ArrayList<>();
+    private List<Fragment> fragments = new ArrayList<>();
 
     /**
      * Required empty constructor
@@ -54,6 +53,9 @@ public class WalkFragment extends Fragment {
         interestingPlaces = Utils.getInterestingPlaces(((Activity) mActivity));
 
         prepareFragments();
+
+        // Set sound mute/unmute state in all flyweights
+        soundChange(Utils.soundOn);
 
     }
 
@@ -136,5 +138,12 @@ public class WalkFragment extends Fragment {
 
     public List<Fragment> getFragments() {
         return fragments;
+    }
+
+    public void soundChange(boolean soundOn) {
+        // Inform every flyweight fragment about the change
+        for (Fragment f : fragments) {
+            ((InterestingPlaceFlyweightFragment)f).soundChange(soundOn);
+        }
     }
 }
