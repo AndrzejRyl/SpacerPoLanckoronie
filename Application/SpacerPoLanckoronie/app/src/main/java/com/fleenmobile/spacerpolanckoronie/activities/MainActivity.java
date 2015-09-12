@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.fleenmobile.spacerpolanckoronie.GPSUtils.GPSService;
@@ -51,6 +52,7 @@ public class MainActivity extends ActionBarActivity implements IFragmentCommunic
     public static final String GO_BACK_INTERESTING_PLACES = "go back";
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
+    private RelativeLayout mDrawer;
     private ListView mDrawerList;
     private TextView mToolbarTitleTV;
     private ImageView mSound;
@@ -219,6 +221,7 @@ public class MainActivity extends ActionBarActivity implements IFragmentCommunic
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawer = (RelativeLayout) findViewById(R.id.drawer);
         mDrawerToggle = new ActionBarDrawerToggle(
                 this,
                 mDrawerLayout,
@@ -319,7 +322,7 @@ public class MainActivity extends ActionBarActivity implements IFragmentCommunic
         mDrawerList.setItemChecked(position, true);
         mTitle = menuItems.get(position).getName();
         setTitle(mTitle);
-        mDrawerLayout.closeDrawer(mDrawerList);
+        mDrawerLayout.closeDrawer(mDrawer);
     }
 
     @Override
