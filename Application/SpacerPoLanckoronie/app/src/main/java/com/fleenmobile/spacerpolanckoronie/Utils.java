@@ -77,7 +77,7 @@ public class Utils {
                         R.drawable.place2,
                         R.raw.place2,
                         new GPSPoint(49.850292, 19.716644),
-                        new GPSRange(new GPSPoint(49.850111, 19.716409), new GPSPoint(49.850633, 19.717219))));
+                        new GPSRange(new GPSPoint(49.850095, 19.716546), new GPSPoint(49.850609, 19.717011))));
         result.add(
                 new InterestingPlace(
                         resources.getString(R.string.place3_name),
@@ -117,7 +117,7 @@ public class Utils {
                         R.drawable.place7,
                         R.raw.place7,
                         new GPSPoint(49.847888, 19.712509),
-                        new GPSRange(new GPSPoint(49.847489, 19.711997), new GPSPoint(49.848200, 19.713120))));
+                        new GPSRange(new GPSPoint(49.847489, 19.711997), new GPSPoint(49.848200, 19.713270))));
 
         return result;
     }

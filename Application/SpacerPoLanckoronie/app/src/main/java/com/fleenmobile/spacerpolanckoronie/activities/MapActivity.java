@@ -74,6 +74,16 @@ public class MapActivity extends ActionBarActivity {
                 if (beginningFlag && intent.getIntExtra(Utils.INTERESTING_PLACE_BROADCAST, 0) != 0)
                     return;
 
+                // There is a problem with small proximity between Tadeusz Villa and the Quarry.
+                // Whenever the user just visited the quarry and is going to Castle Villa
+                // we have to react only on going in range of Castle Villa (so as not to provoke
+                // going in circle between Tadeusz Villa and the Quarry)
+                // TODO: Make sure that Castle Villa is in fact fourth in the order
+                if (mDestination.getName().equals(MapActivity.this.getResources().getString(R.string.place5_name))
+                    && intent.getIntExtra(Utils.INTERESTING_PLACE_BROADCAST, 0) != 3)
+                    return;
+
+
                 // Start MainActivity and set it to walk module
                 Intent i = new Intent(MapActivity.this, MainActivity.class);
                 i.putExtra(Utils.MAP_ACTIVITY, "");

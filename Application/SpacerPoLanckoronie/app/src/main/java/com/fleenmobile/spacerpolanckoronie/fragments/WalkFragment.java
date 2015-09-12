@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.fleenmobile.spacerpolanckoronie.GPSUtils.GPSRange;
 import com.fleenmobile.spacerpolanckoronie.GPSUtils.GPSService;
@@ -90,6 +91,12 @@ public class WalkFragment extends Fragment {
         InterestingPlace walkBeginning = interestingPlaces.get(0);
         Location usersLocation = mService.getLocation();
         GPSRange mapRange = Utils.getMapRange();
+
+        // It takes a little amount of time for GPS service to get a first fix
+        if (usersLocation == null) {
+            Toast.makeText(this.getActivity(), getResources().getString(R.string.no_gps_signal), Toast.LENGTH_LONG).show();
+            return;
+        }
 
         if (mapRange.inRange(usersLocation)) {
             // If the user is on our map, show him our navigation
