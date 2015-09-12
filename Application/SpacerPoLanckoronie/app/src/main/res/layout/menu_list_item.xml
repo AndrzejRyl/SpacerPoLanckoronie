@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/menu_item_height"
+    android:paddingLeft="@dimen/activity_horizontal_margin">
+
+    <ImageView
+        android:id="@+id/menu_item_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:src="@drawable/ic_directions_walk_black_24dp" />
+
+    <com.fleenmobile.spacerpolanckoronie.fonts.RobotoTextView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/menu_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/menu_item_icon"
+        android:gravity="center_vertical"
+        android:text="dasdasadssd"
+        android:textColor="#D7000000"
+        android:textSize="@dimen/menu_item"
+        app:typeface="roboto_medium" />
+
+</RelativeLayout>

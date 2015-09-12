@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="10dp">
+
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:layout_margin="0dp"
+        card_view:cardCornerRadius="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <ImageView
+                android:id="@+id/card_interesting_place_image"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_margin="0dp"
+                android:layout_weight="4"
+                android:padding="0dp"
+                android:scaleType="centerCrop" />
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="6">
+
+                <com.fleenmobile.spacerpolanckoronie.fonts.RobotoTextView
+                    android:id="@+id/card_interesting_place_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:padding="3dp"
+                    android:textColor="#66000000"
+                    android:textSize="@dimen/card_title"
+                    app:typeface="roboto_medium" />
+
+                <com.fleenmobile.spacerpolanckoronie.fonts.RobotoTextView
+                    android:id="@+id/card_interesting_place_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_below="@+id/card_interesting_place_name"
+                    android:layout_marginLeft="@dimen/content_margin"
+                    android:ellipsize="end"
+                    android:maxLines="6"
+                    android:textColor="#D7000000"
+                    android:textSize="@dimen/card_content"
+                    app:typeface="roboto_medium" />
+
+
+                <com.fleenmobile.spacerpolanckoronie.fonts.RobotoTextView
+                    android:id="@+id/card_interesting_place_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_margin="@dimen/activity_horizontal_margin"
+                    android:gravity="center"
+                    android:paddingRight="@dimen/button_padding"
+                    android:text="@string/card_interesting_place_button"
+                    android:textColor="#3f51b5"
+                    android:textSize="@dimen/button"
+                    app:typeface="roboto_medium" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</RelativeLayout>
