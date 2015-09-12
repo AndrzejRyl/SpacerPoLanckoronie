@@ -14,28 +14,43 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/app_bar">
-        <!-- The main content view -->
-        <FrameLayout
-            android:id="@+id/content_frame"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-        <!-- The navigation drawer -->
-        <ListView
-            android:id="@+id/left_drawer"
-            android:layout_width="300dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:background="#EEEEEE"
-            android:choiceMode="singleChoice"
-            android:divider="@android:color/transparent"
-            android:dividerHeight="0dp"
-            android:paddingTop="@dimen/activity_horizontal_margin" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <!-- The main content view -->
+            <FrameLayout
+                android:id="@+id/content_frame"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <!-- The navigation drawer -->
+            <ListView
+                android:id="@+id/left_drawer"
+                android:layout_width="300dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:background="#EEEEEE"
+                android:choiceMode="singleChoice"
+                android:divider="@android:color/transparent"
+                android:dividerHeight="0dp"
+                android:paddingTop="@dimen/activity_horizontal_margin" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:background="@drawable/logo_material_design_transparent"
+                android:scaleType="fitCenter" />
+        </RelativeLayout>
     </android.support.v4.widget.DrawerLayout>
 
     <View
         android:id="@+id/toolbar_shadow"
         android:layout_width="match_parent"
-        android:layout_below="@+id/app_bar"
         android:layout_height="5dp"
+        android:layout_below="@+id/app_bar"
         android:background="@drawable/toolbar_dropshadow" />
 </RelativeLayout>
