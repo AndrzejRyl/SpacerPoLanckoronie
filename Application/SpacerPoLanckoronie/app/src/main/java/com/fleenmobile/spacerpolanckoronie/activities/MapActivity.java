@@ -244,10 +244,10 @@ public class MapActivity extends ActionBarActivity {
         double latitudePercentage = topoghrapicLatitudeDelta / topographicHeight;
 
         if (mark == DESTINATION_MARK) {
-            destinationMarginLeft = (int) (longitudePercentage * mapWidth) - markWidth;
+            destinationMarginLeft = (int) (longitudePercentage * mapWidth) - markWidth/2;
             destinationMarginTop = mapHeight - (int) (latitudePercentage * mapHeight) - markHeight;
         } else {
-            marginLeft = (int) (longitudePercentage * mapWidth) - markWidth;
+            marginLeft = (int) (longitudePercentage * mapWidth) - markWidth/2;
             marginTop = mapHeight - (int) (latitudePercentage * mapHeight) - markHeight;
         }
     }
