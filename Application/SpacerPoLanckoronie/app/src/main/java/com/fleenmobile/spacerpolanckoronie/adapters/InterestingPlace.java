@@ -13,14 +13,16 @@ public class InterestingPlace {
 
     private String name;
     private String description;
+    private String shortDesc;
     private int image;
     private int audio;
     private GPSPoint coordinates;
     private GPSRange range;
 
-    public InterestingPlace(String name, String description, int image, int audio, GPSPoint coordinates, GPSRange range) {
+    public InterestingPlace(String name, String description, String shortDesc, int image, int audio, GPSPoint coordinates, GPSRange range) {
         this.name = name;
         this.description = description;
+        this.shortDesc = shortDesc;
         this.image = image;
         this.audio = audio;
         this.coordinates = coordinates;
@@ -73,5 +75,13 @@ public class InterestingPlace {
 
     public void setRange(GPSRange range) {
         this.range = range;
+    }
+
+    public String getShortDesc() {
+        return shortDesc;
+    }
+
+    public void setShortDesc(String shortDesc) {
+        this.shortDesc = shortDesc;
     }
 }

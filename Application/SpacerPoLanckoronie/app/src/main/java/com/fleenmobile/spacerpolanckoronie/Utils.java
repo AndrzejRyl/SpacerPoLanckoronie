@@ -66,6 +66,7 @@ public class Utils {
                 new InterestingPlace(
                         resources.getString(R.string.place1_name),
                         resources.getString(R.string.place1_description),
+                        resources.getString(R.string.place1_short),
                         R.drawable.place1,
                         R.raw.place1,
                         new GPSPoint(49.845319, 19.718539),
@@ -74,6 +75,7 @@ public class Utils {
                 new InterestingPlace(
                         resources.getString(R.string.place2_name),
                         resources.getString(R.string.place2_description),
+                        resources.getString(R.string.place2_short),
                         R.drawable.place2,
                         R.raw.place2,
                         new GPSPoint(49.850292, 19.716644),
@@ -82,6 +84,7 @@ public class Utils {
                 new InterestingPlace(
                         resources.getString(R.string.place3_name),
                         resources.getString(R.string.place3_description),
+                        resources.getString(R.string.place3_short),
                         R.drawable.place3,
                         R.raw.place3,
                         new GPSPoint(49.850400, 19.716147),
@@ -90,6 +93,7 @@ public class Utils {
                 new InterestingPlace(
                         resources.getString(R.string.place4_name),
                         resources.getString(R.string.place4_description),
+                        resources.getString(R.string.place4_short),
                         R.drawable.place4,
                         R.raw.place4,
                         new GPSPoint(49.848454, 19.718972),
@@ -98,6 +102,7 @@ public class Utils {
                 new InterestingPlace(
                         resources.getString(R.string.place5_name),
                         resources.getString(R.string.place5_description),
+                        resources.getString(R.string.place5_short),
                         R.drawable.place5,
                         R.raw.place5,
                         new GPSPoint(49.848562, 19.717906),
@@ -106,6 +111,7 @@ public class Utils {
                 new InterestingPlace(
                         resources.getString(R.string.place6_name),
                         resources.getString(R.string.place6_description),
+                        resources.getString(R.string.place6_short),
                         R.drawable.place6,
                         R.raw.place6,
                         new GPSPoint(49.847889, 19.716184),
@@ -114,6 +120,7 @@ public class Utils {
                 new InterestingPlace(
                         resources.getString(R.string.place7_name),
                         resources.getString(R.string.place7_description),
+                        resources.getString(R.string.place7_short),
                         R.drawable.place7,
                         R.raw.place7,
                         new GPSPoint(49.847888, 19.712509),

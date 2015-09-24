@@ -64,7 +64,7 @@ public class InterestingPlacesAdapter extends ArrayAdapter<InterestingPlace>{
         final InterestingPlace interestingPlace = objects.get(position);
         holder.image.setImageResource(interestingPlace.getImage());
         holder.name.setText(interestingPlace.getName());
-        holder.description.setText(interestingPlace.getDescription());
+        holder.description.setText(interestingPlace.getShortDesc());
 
         row.setOnClickListener(new View.OnClickListener() {
             @Override
