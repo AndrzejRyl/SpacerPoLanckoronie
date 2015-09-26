@@ -76,7 +76,7 @@ public class NextPlaceDialog extends DialogFragment{
 
     private void setData() {
         nameTV.setText(mPlace.getName());
-        imageView.setImageResource(mPlace.getImage());
+        imageView.setImageResource(mPlace.getSmallImage());
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
         buttonTV.setOnClickListener(new View.OnClickListener() {

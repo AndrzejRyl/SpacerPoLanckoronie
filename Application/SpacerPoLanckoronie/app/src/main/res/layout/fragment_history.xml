@@ -17,50 +17,33 @@
             android:orientation="vertical">
 
             <com.fleenmobile.spacerpolanckoronie.fonts.RobotoTextView
-                android:id="@+id/history_title1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/activity_horizontal_margin"
-                android:text="@string/history_title1"
-                android:textColor="#96000000"
-                android:textSize="@dimen/title"
-                app:typeface="roboto_medium" />
-
-            <com.fleenmobile.spacerpolanckoronie.fonts.RobotoTextView
                 android:id="@+id/history_content1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/content_margin"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:padding="@dimen/activity_vertical_margin"
                 android:text="@string/history_content1"
                 android:textColor="#D7000000"
                 android:textSize="@dimen/content"
                 app:typeface="roboto_medium" />
 
             <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/activity_horizontal_margin"
-                android:src="@drawable/panorama"/>
-
-            <com.fleenmobile.spacerpolanckoronie.fonts.RobotoTextView
-                android:id="@+id/history_title2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/activity_horizontal_margin"
-                android:text="@string/history_title2"
-                android:textColor="#96000000"
-                android:textSize="@dimen/title"
-                app:typeface="roboto_medium" />
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/lorenz"/>
 
             <com.fleenmobile.spacerpolanckoronie.fonts.RobotoTextView
                 android:id="@+id/history_content2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/content_margin"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:padding="@dimen/activity_vertical_margin"
                 android:text="@string/history_content2"
                 android:textColor="#D7000000"
                 android:textSize="@dimen/content"
                 app:typeface="roboto_medium" />
+
         </LinearLayout>
     </ScrollView>
 

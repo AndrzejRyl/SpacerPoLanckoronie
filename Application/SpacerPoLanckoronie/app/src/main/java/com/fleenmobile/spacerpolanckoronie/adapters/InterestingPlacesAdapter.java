@@ -62,7 +62,7 @@ public class InterestingPlacesAdapter extends ArrayAdapter<InterestingPlace>{
 
         // Set holder according to interesting place data
         final InterestingPlace interestingPlace = objects.get(position);
-        holder.image.setImageResource(interestingPlace.getImage());
+        holder.image.setImageResource(interestingPlace.getSmallImage());
         holder.name.setText(interestingPlace.getName());
         holder.description.setText(interestingPlace.getShortDesc());
 
