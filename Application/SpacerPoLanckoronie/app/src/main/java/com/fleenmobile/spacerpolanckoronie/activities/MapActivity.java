@@ -85,12 +85,13 @@ public class MapActivity extends ActionBarActivity {
 
 
                 // Start MainActivity and set it to walk module
+                finish();
+
                 Intent i = new Intent(MapActivity.this, MainActivity.class);
                 i.putExtra(Utils.MAP_ACTIVITY, "");
                 i.putExtra(Utils.INTERESTING_PLACE_BROADCAST, intent.getIntExtra(Utils.INTERESTING_PLACE_BROADCAST, 0));
                 startActivity(i);
 
-                finish();
             }
         };
 
