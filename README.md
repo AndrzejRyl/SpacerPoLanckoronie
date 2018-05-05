@@ -1,2 +1,1 @@
-This is a project for 'Małopolski Instytut Teatralny'.
-It will allow users to discover Lanckorona in their own pace.
+Android application made for Małopolski Instytut Teatralny. It takes user for a walk through Lanckorona. Using GPS system and live-updating map with user's location it helps him to get to all interesting places. Whenever the user approaches one of the places app is supplyinhg him with picture, description and audio recording telling him a story connected to this place.
